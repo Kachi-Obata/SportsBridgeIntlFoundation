@@ -1,0 +1,7 @@
+# Project docs — versioned in git, not served on the public site
+CLAUDE.md
+DESIGN_BRIEF.md
+CONTENT.md
+PRODUCT.md
+README.md
+.gitignore
