@@ -1,0 +1,10 @@
+# macOS
+.DS_Store
+
+# Local AI-agent tooling (not part of the site)
+.claude/
+.cursor/
+.gemini/
+.agents/
+.impeccable/
+skills-lock.json
