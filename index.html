@@ -25,6 +25,7 @@
 <header class="site-header">
   <input type="checkbox" id="navToggle" class="nav-toggle-input" aria-hidden="true">
   <div class="wrap nav-bar">
+    <!-- SWAP: logo pending -->
     <a href="index.html" class="nav-logo"><img src="assets/logo-nav.png" alt="Sports Bridge International Foundation — home"></a>
     <nav class="nav-links" id="siteNav" aria-label="Main">
       <a class="link-draw" href="index.html" aria-current="page">Home</a>
@@ -35,14 +36,22 @@
       <a class="link-draw" href="contact.html">Contact</a>
     </nav>
     <label for="navToggle" class="nav-burger"><span></span><span></span></label>
-    <a href="donate.html" class="btn btn-pink nav-donate">Donate</a>
+    <a href="contact.html" class="btn btn-ink nav-cta">Get Involved</a>
   </div>
 </header>
 
 <main id="main">
 
-  <!-- ============ HERO — touchline frame ============ -->
-  <section class="hero" aria-labelledby="hero-h">
+  <!-- ============ HERO — video background + touchline frame ============ -->
+  <section class="hero hero-video" aria-labelledby="hero-h">
+    <!-- SWAP: replace placeholder hero video with owner-provided footage -->
+    <div class="hero-media" aria-hidden="true">
+      <video class="hero-bg" autoplay muted loop playsinline preload="metadata" poster="assets/hero-poster.jpg">
+        <source src="assets/hero.webm" type="video/webm">
+        <source src="assets/hero.mp4" type="video/mp4">
+      </video>
+      <span class="hero-tint"></span>
+    </div>
     <div class="touchline" aria-hidden="true">
       <svg class="touchline-rect" viewBox="0 0 100 100" preserveAspectRatio="none">
         <rect x="0" y="0" width="100" height="100" pathLength="4"/>
@@ -69,23 +78,26 @@
           <a href="impact.html" class="btn btn-ghost">See our impact</a>
         </div>
       </div>
+    </div>
+  </section>
 
-      <div class="hero-stats">
-        <!-- SWAP: verify before launch -->
-        <div class="stat">
-          <div class="stat-n"><span data-count="12000">12,000</span></div>
-          <div class="stat-l">Young people reached</div>
-        </div>
-        <!-- SWAP: verify before launch -->
-        <div class="stat">
-          <div class="stat-n"><span data-count="48">48</span></div>
-          <div class="stat-l">Community programmes</div>
-        </div>
-        <!-- SWAP: verify before launch -->
-        <div class="stat">
-          <div class="stat-n"><span data-count="16">16</span></div>
-          <div class="stat-l">Partner schools</div>
-        </div>
+  <!-- ============ STAT STRIP — relocated trio, first thing on scroll ============ -->
+  <section class="stat-strip" aria-label="Foundation at a glance">
+    <div class="wrap stat-strip-inner">
+      <!-- SWAP: verify before launch -->
+      <div class="stat">
+        <div class="stat-n"><span data-count="2000">2,000</span><span class="stat-plus">+</span></div>
+        <div class="stat-l">Young people reached</div>
+      </div>
+      <!-- SWAP: verify before launch -->
+      <div class="stat">
+        <div class="stat-n"><span data-count="48">48</span></div>
+        <div class="stat-l">Community programmes</div>
+      </div>
+      <!-- SWAP: verify before launch -->
+      <div class="stat">
+        <div class="stat-n"><span data-count="16">16</span></div>
+        <div class="stat-l">Partner schools</div>
       </div>
     </div>
   </section>
@@ -98,12 +110,15 @@
         <span>Powered by Sports Bridge International</span>
         <span>Aligned to the UN Sustainable Development Goals</span>
         <span>Proudly Nigerian, built for Africa</span>
+        <!-- verify exact phrasing/year with Rerhe -->
+        <span>SelectUSA Investment Summit delegate</span>
       </div>
       <div class="marquee-set" aria-hidden="true">
         <span>Anchored at Ikoyi Club 1938</span>
         <span>Powered by Sports Bridge International</span>
         <span>Aligned to the UN Sustainable Development Goals</span>
         <span>Proudly Nigerian, built for Africa</span>
+        <span>SelectUSA Investment Summit delegate</span>
       </div>
     </div>
   </div>
@@ -119,13 +134,24 @@
       </div>
 
       <div class="split">
-        <div class="lead-col section-head" style="margin-bottom:0">
-          <p class="kicker">Who we are</p>
-          <h2 class="display" id="mission-h" style="font-size:var(--fs-head); margin-top:1.25rem">A foundation built on a simple belief: every child deserves a field, a coach, and a future.</h2>
+        <div class="lead-col">
+          <div class="section-head" style="margin-bottom:1.75rem">
+            <p class="kicker">Who we are</p>
+            <h2 class="display" id="mission-h" style="font-size:var(--fs-head); margin-top:1.25rem">A foundation built on a simple belief: every child deserves a field, a coach, and a future.</h2>
+          </div>
+          <div class="body-copy reveal">
+            <p>The Sports Bridge International Foundation is the social impact arm of Sports Bridge International. Sport brings strangers together as teammates &mdash; and we exist to remove the barriers that keep people on the sidelines, whether those barriers are economic, geographic, cultural, or gender-based. For the underserved, the overlooked, and the newly arrived, that might mean a missing pair of boots, a school without a pitch, a talent no one was there to spot, or simply not knowing where to begin.</p>
+            <p style="margin-top:1.25rem">We meet young people where they already are &mdash; on the phone, in the gaming caf&eacute;, on the dusty estate pitch &mdash; and we walk with them all the way to training academies, classrooms and careers.</p>
+          </div>
         </div>
-        <div class="side-col body-copy reveal">
-          <p>The Sports Bridge International Foundation is the social impact arm of Sports Bridge International. We exist to remove the barriers that keep young Nigerians from discovering their potential &mdash; whether that barrier is a missing pair of boots, a school without a pitch, or a talent no one was there to spot.</p>
-          <p style="margin-top:1.25rem">We meet young people where they already are &mdash; on the phone, in the gaming caf&eacute;, on the dusty estate pitch &mdash; and we walk with them all the way to training academies, classrooms and careers.</p>
+        <div class="side-col">
+          <!-- SWAP: real photo -->
+          <figure class="mission-figure fig-frame">
+            <span class="corner corner-tl"></span>
+            <span class="corner corner-br"></span>
+            <div class="duotone"><img src="https://images.unsplash.com/photo-1517649763962-0c623066013b?auto=format&fit=crop&w=720&q=70" alt="A coach guiding a young player through a drill at the side of a pitch" loading="lazy"></div>
+        <p class="swap-note">I'll swap this for a real photo of one of our coaches working with a young player soon.</p>
+          </figure>
         </div>
       </div>
 
@@ -175,21 +201,33 @@
             <span class="j-num" aria-hidden="true">01</span>
             <h3>Connect</h3>
             <p>We reach young people through gaming tournaments, e-sports and digital communities &mdash; the spaces they already love.</p>
+            <!-- SWAP: real photo -->
+            <figure class="j-thumb"><div class="duotone"><img src="https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=420&q=65" alt="A young person at a gaming controller and screen" loading="lazy"></div>
+        <p class="swap-note">I'll replace this with a shot from one of our own gaming / e-sports sessions soon.</p></figure>
           </li>
           <li class="journey-step">
             <span class="j-num" aria-hidden="true">02</span>
             <h3>Play</h3>
             <p>Digital players step onto real pitches through open tournaments, taster days and school leagues across Lagos.</p>
+            <!-- SWAP: real photo -->
+            <figure class="j-thumb"><div class="duotone"><img src="https://images.unsplash.com/photo-1431324155629-1a6deb1dec8d?auto=format&fit=crop&w=420&q=65" alt="Children playing football on an outdoor pitch" loading="lazy"></div>
+        <p class="swap-note">I'll replace this with our kids on a real Lagos pitch soon.</p></figure>
           </li>
           <li class="journey-step">
             <span class="j-num" aria-hidden="true">03</span>
             <h3>Grow</h3>
             <p>Promising talent enters structured academies with coaching, sports science, mentorship and scholarship support.</p>
+            <!-- SWAP: real photo -->
+            <figure class="j-thumb"><div class="duotone"><img src="https://images.unsplash.com/photo-1577471488278-16eec37ffcc2?auto=format&fit=crop&w=420&q=65" alt="Young athletes in a structured academy training session" loading="lazy"></div>
+        <p class="swap-note">I'll replace this with one of our real academy training sessions soon.</p></figure>
           </li>
           <li class="journey-step">
             <span class="j-num" aria-hidden="true">04</span>
             <h3>Rise</h3>
             <p>Graduates move into education, employment and the sports economy &mdash; and return to coach the next generation.</p>
+            <!-- SWAP: real photo -->
+            <figure class="j-thumb"><div class="duotone"><img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?auto=format&fit=crop&w=420&q=65" alt="A young coach leading others at a sports facility" loading="lazy"></div>
+        <p class="swap-note">I'll replace this with a graduate of ours coaching or at work in sport soon.</p></figure>
           </li>
         </ol>
       </div>
@@ -268,7 +306,7 @@
       <!-- SWAP: verify before launch -->
       <div class="figures">
         <div class="figure">
-          <div class="stat-n"><span data-count="12000">12,000</span><span class="stat-plus">+</span></div>
+          <div class="stat-n"><span data-count="2000">2,000</span><span class="stat-plus">+</span></div>
           <div class="stat-l">Young people reached since 2023</div>
         </div>
         <div class="figure">
@@ -297,11 +335,11 @@
 
       <div class="involve">
         <div class="involve-col">
-          <h3>Partner &amp; Sponsor</h3>
+          <h3>Partner With Us</h3>
           <ul>
-            <li>Reach a premium, purpose-driven audience</li>
-            <li>Activation across events, retail &amp; media</li>
-            <li>Verified social-impact reporting</li>
+            <li>Collaborate across events, retail and community programmes</li>
+            <li>Reach a purpose-driven audience</li>
+            <li>Share in verified social-impact reporting</li>
           </ul>
           <a class="kicker link-draw" href="contact.html">Talk to us &rarr;</a>
         </div>
@@ -327,19 +365,45 @@
     </div>
   </section>
 
-  <!-- ============ DONATE BAND — full-bleed teal ============ -->
-  <section class="donate-band section-tight on-teal" aria-labelledby="donate-h">
+  <!-- ============ 06 / BEYOND BORDERS — full-bleed teal ============ -->
+  <section class="teal-band section-tight on-teal" aria-labelledby="bb-h">
     <svg class="penalty-arc" style="left:-130px; top:50%; transform:translateY(-50%); width:clamp(260px,26vw,400px); height:auto;" viewBox="0 0 400 400" aria-hidden="true">
       <circle cx="200" cy="200" r="198"/>
     </svg>
-    <div class="wrap band-grid">
-      <div class="band-copy">
-        <p class="kicker">Make a difference</p>
-        <h2 class="display" id="donate-h">Your gift becomes a boot, a coach, a chance.</h2>
-        <p>100% of community donations go directly to programme delivery. Choose an amount and see exactly what it unlocks for a young person in Lagos today.</p>
+    <div class="wrap">
+      <p class="kicker" style="color:var(--paper); display:block; margin-bottom:1.25rem">Sport without borders</p>
+      <h2 class="display bb-head" id="bb-h" style="font-size:var(--fs-head)">Shared play into shared community.</h2>
+      <p class="bb-lead">Sport is one of the most powerful tools for integration &mdash; helping migrants build relationships, learn the culture, and feel a genuine sense of belonging. By bringing migrants and host communities together on the field and court, we turn shared play into shared community.</p>
+
+      <div class="bb-grid">
+        <div>
+          <blockquote class="bb-quote">
+            &ldquo;What we launched in Lagos is more than a sports facility; it is a scalable platform that merges sport, enterprise, and social impact in a way that reflects the future of community development.&rdquo;
+            <cite>Rerhe Idonije, Managing Partner, Sports Bridge</cite>
+          </blockquote>
+          <p class="bb-context">A recent tournament brought together players of many nationalities and professional backgrounds &mdash; underscoring sport's role as a platform for networking, wellness, and international exchange.</p>
+          <div class="bb-next">
+            <span class="kicker">What's next</span>
+            <ul>
+              <li>Tournaments designed specifically for migrant communities</li>
+              <li>Workshops for mothers and female migrants</li>
+              <li>Multi-sport pathways &mdash; golf, badminton, swimming and more &mdash; as tools for finding friends, learning the culture, and integrating into society</li>
+              <li>Support that goes beyond the social: helping people discover new ambitions, find work, and support their mental health</li>
+            </ul>
+          </div>
+        </div>
+        <div class="bb-media">
+          <!-- SWAP: confirm final crops/selections with owner -->
+          <figure class="bb-a"><div class="duotone-paper"><img src="https://images.unsplash.com/photo-1471295253337-3ceaaedca402?auto=format&fit=crop&w=800&q=70" alt="Players of many nationalities together at a Sports Bridge tournament in Lagos" loading="lazy"></div>
+        <p class="swap-note">I'll replace this with a real wide shot from our Lagos tournament soon.</p></figure>
+          <!-- SWAP: confirm final crops/selections with owner -->
+          <figure class="bb-b"><div class="duotone-paper"><img src="https://images.unsplash.com/photo-1552667466-07770ae110d0?auto=format&fit=crop&w=600&q=70" alt="People from different backgrounds sharing a moment on the sidelines" loading="lazy"></div>
+        <p class="swap-note">I'll replace this with a candid moment between players from the tournament soon.</p></figure>
+        </div>
       </div>
-      <div class="band-cta">
-        <a href="donate.html" class="btn btn-pink">Donate</a>
+
+      <div class="bb-cta">
+        <a href="article-beyond-borders.html" class="btn btn-paper">Read the story</a>
       </div>
     </div>
   </section>
@@ -350,6 +414,7 @@
   <div class="wrap">
     <div class="foot-grid">
       <div class="foot-brand">
+        <!-- SWAP: logo pending -->
         <img src="assets/logo-nav.png" alt="Sports Bridge International Foundation">
         <p>The social impact foundation building pathways from play to potential &mdash; for young people across Lagos and Africa.</p>
       </div>
@@ -365,7 +430,6 @@
         <a href="contact.html">Partner With Us</a>
         <a href="contact.html">Volunteer</a>
         <a href="contact.html">Enrol a Child</a>
-        <a href="donate.html">Donate</a>
       </nav>
       <div class="foot-col foot-news">
         <h2>Stay in the loop</h2>

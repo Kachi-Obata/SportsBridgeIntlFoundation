@@ -8,6 +8,14 @@
 
   var reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
+  /* ---- Hero video: honour reduced-motion (poster only, no autoplay) ---- */
+  var heroVideo = document.querySelector(".hero-bg");
+  if (heroVideo && reducedMotion) {
+    heroVideo.removeAttribute("autoplay");
+    heroVideo.addEventListener("loadedmetadata", function () { heroVideo.pause(); });
+    try { heroVideo.pause(); } catch (e) {}
+  }
+
   /* ---- Mobile nav: a11y enhancement over the CSS checkbox toggle ---- */
   var toggle = document.getElementById("navToggle");
   var burger = document.querySelector(".nav-burger");

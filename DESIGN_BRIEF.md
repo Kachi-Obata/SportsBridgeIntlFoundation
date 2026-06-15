@@ -35,21 +35,21 @@ The one thing a visitor remembers: **the field-line graphic system** — section
 
 **Color discipline:**
 - Paper dominates. Ink does the work. Teal is the primary brand color (buttons, links, large section fields, duotone imagery). 
-- Pink appears ONLY for: stat numerals' highlights, the donate CTA, one hover state, and small "live" markers. If pink exceeds ~3% of any viewport, it's overused.
-- One or two full-bleed `--teal-deep` sections per page (e.g., the donation prompt band) for rhythm. Never gradients between brand colors.
+- Pink appears ONLY for: stat numerals' highlights, one hero hover state (the existing pink↔teal hover split per PROJECT_LOG.md §8), and small "live" markers. If pink exceeds ~3% of any viewport, it's overused.
+- One or two full-bleed `--teal-deep` sections per page (e.g., the Beyond Borders band) for rhythm. Never gradients between brand colors (except the logo, which is untouched and out of scope here).
 
 ## 3. Typography
 
 | Role | Font | Treatment |
 |---|---|---|
-| Display / headlines | **Oswald** (Google Fonts) | Uppercase, weight 500–600, tracking -1% to 0, set HUGE — hero headline 12–16vw on desktop (clamp), section heads 4–6rem. Line-height 0.95–1.0. |
+| Display / headlines | **Oswald** (Google Fonts) | Uppercase, weight 500–600, tracking -1% to 0, set HUGE — hero headline `clamp(2.5rem, 10.5vw, 9.5rem)` (as implemented; supersedes an earlier 12–16vw spec, which overflowed at tablet/mobile with the verbatim headline copy), section heads 4–6rem. Line-height 0.95–1.0. |
 | Body | **Figtree** | 1rem–1.125rem, line-height 1.6, `--ink-soft` for long passages |
 | Data / labels / eyebrows | **IBM Plex Mono** | 0.75–0.8125rem, uppercase, letter-spacing 0.08em — used for eyebrows, stat labels, timeline years, table headers, footer meta |
 
 Oswald + Figtree are the same families as the SBI store — this is intentional brand glue. The mono is the foundation's own addition: it gives the editorial/data flavor (fixture lists, stat sheets) and exists nowhere on the store.
 
 Type rules:
-- Section pattern: mono eyebrow with index number (`01 / WHO WE ARE`) → Oswald headline → Figtree body.
+- Section pattern: mono eyebrow (plain text, e.g. `Who we are`) → Oswald headline → Figtree body. The section index number appears ONLY in the divider circle, not repeated in the eyebrow — repeating it read as duplication. Legal pages (privacy/terms), which have no divider circles, may still use a numbered label style (e.g. `01 / Agreement`) since there's no duplication there.
 - Big numerals (stats, timeline years) set in Oswald, with the unit/label in mono beneath.
 - No italic serifs anywhere. No Fraunces, no Playfair, no decorative scripts.
 
@@ -74,9 +74,10 @@ Respect `prefers-reduced-motion` globally. Otherwise:
 - **Line-draw on scroll:** field markings (center circle, the Bridge line, arcs) animate via `stroke-dashoffset` when entering viewport. IntersectionObserver, once per element.
 - **Stat roll-up:** numerals count up on first reveal (≤900ms, eased). 
 - **Trust bar:** infinite marquee (CSS keyframes, duplicated track), pauses on hover.
-- **Hero load:** one orchestrated entrance — headline lines stagger up (80ms apart), then the touchline frame draws in. That's the page's single "moment"; everything else is restrained.
+- **Hero load:** the touchline frame draws in over the ambient video background; headline lines stagger up (80ms apart) on top. Restrained — the video is background texture, not the moment.
+- **Hero video:** muted, autoplay, loop, `playsinline`. `prefers-reduced-motion` → no autoplay, poster image only (same duotone treatment). No scroll-cue indicator anywhere on the page — normal scroll, no scroll-snap.
 - **Hover:** links get an underline that draws left→right; buttons invert (paper↔ink or teal fill slides in). 100–200ms.
-- **Banned motion:** generic fade-up on every element, parallax backgrounds, scroll-jacking, floating/levitating cards, pulsing glows.
+- **Banned motion:** generic fade-up on every element, parallax backgrounds, scroll-jacking (JS that hijacks/redirects scroll input — CSS-only smooth scrolling and standard anchor links are fine), scroll-snap, scroll-cue arrows/"scroll to explore" indicators, floating/levitating cards, pulsing glows.
 
 ## 6. Layout principles
 
@@ -86,12 +87,16 @@ Respect `prefers-reduced-motion` globally. Otherwise:
 - Breakpoints: 900px (tablet/desktop split), 480px (mobile) — consistent with our other properties.
 - Max content width ~1280px with the touchline frame extending nearer the viewport edge.
 
-## 7. Imagery strategy (critical — no real photos exist yet)
+## 7. Imagery strategy (revised — image-led storytelling)
 
-- The design must stand WITHOUT photography. Geometry + type carry it.
-- Where images are used (about, impact story, news cards): **teal duotone treatment** — grayscale base + teal multiply/screen (CSS `filter: grayscale(1)` + a `--teal` overlay with `mix-blend-mode: multiply` on a light tint, or pre-processed). Every image gets the identical treatment so curated placeholders read as art direction, not stock.
-- Maximum ~5 photographs across the whole site at launch. Mark each `<!-- SWAP: real programme photo -->`.
-- NEVER: smiling-stock-kids montages, hands-in-huddle clichés, full-color Unsplash heroes.
+Owner feedback was explicit: the site should be more of a storyteller, with more imagery and less text. This reverses the earlier "photo-light" stance — the field-geometry system now provides the *frame and rhythm* for photography, not a replacement for it.
+
+- Every major section gets a photographic anchor. See **IMAGE_MANIFEST.md** for the full slot-by-slot plan (description, aspect ratio, placeholder search terms, alt-text guidance).
+- **Teal duotone treatment** on every photographic image — grayscale base + teal multiply/screen overlay via a shared `.duotone` CSS class. This is what makes a mix of placeholder/stock images read as one cohesive art direction rather than generic stock.
+- Field-geometry elements (touchline frame, corner arcs, halfway lines) now frame and crop photography rather than substituting for it — e.g. the hero image sits inside the touchline frame; programme images get corner-arc crops instead of plain rectangles.
+- All placeholder images are marked `<!-- SWAP: real photo -->` (or more specific notes per IMAGE_MANIFEST.md) so they're trivial to find and replace once real programme/event photography is available.
+- NEVER: smiling-stock-kids montages, hands-in-huddle clichés, generic corporate-stock framing, or full-color images without the duotone treatment (consistency is what makes placeholders feel intentional).
+- **This supersedes the earlier "~5 photos max" guidance** (PROJECT_LOG.md §7 item 8). Existing images (the real storefront photo, the four team placeholders) stay in their slots; everything in IMAGE_MANIFEST.md is additive.
 
 ## 8. Banned patterns (hard NOs)
 
@@ -105,17 +110,19 @@ Respect `prefers-reduced-motion` globally. Otherwise:
 - fade-up-on-scroll applied indiscriminately
 - Lorem ipsum — all copy comes from CONTENT.md
 - Dark theme (that's the store's territory; the foundation is light)
+- Any donate button, donation form, payment UI, or "give/fund/back/sponsor" language — the site does not collect money (see CLAUDE.md "Funding language")
 
-## 9. Page-by-page notes
+## 9. Page-by-page notes (10 pages)
 
-- **index.html** — Hero (touchline frame, stacked Oswald headline, stat trio as a ruled row), marquee trust bar, Mission (01) with four pillars as a ruled 2×2, The Journey (02) with the Bridge line animation, Programmes preview (03) as league-table rows linking to programmes.html, Impact snapshot (04) with roll-up numerals, Get Involved (05) three ruled columns, full-bleed teal Donate band, footer.
-- **about.html** — Story hero, mission/vision as two ruled columns with the pull quote set huge in Oswald, six values as a 3×2 ruled grid, timeline as a vertical halfway-line with year markers in circles, team grid (duotone, square crops).
-- **programmes.html** — Six programmes as alternating editorial rows: index number, Oswald title, body, stat line in mono. Each row separated by halfway-line dividers.
-- **impact.html** — Big-numeral stat sheet (league-table), outcomes as ruled rows, featured story as a teal full-bleed section with the quote in large Oswald, SDG alignment as a mono-labeled grid of six.
-- **news.html / article.html** — Broadsheet listing: ruled rows with mono dates, Oswald headlines; article page = narrow measure, drop-cap-free, clean.
-- **contact.html** — Two ruled columns: details (mono labels) + form. Form inputs: underline-only style (border-bottom `--line`), mono labels, no rounded boxes.
-- **donate.html** — Amount tiers as a segmented ruled control (not pill chips), Paystack flow preserved exactly from the original package, pink CTA. thank-you.html matches.
-- **privacy.html / terms.html / 404.html** — NEW pages. Legal pages: narrow measure, mono section labels. 404: center circle with "OUT OF BOUNDS — 404" in Oswald, link home.
+- **index.html** — Hero is a full-viewport video background (HOME-01, heavy duotone tint, ambient/textured rather than a clear scene) framed by the touchline border, with the stacked Oswald headline, sub-text and two CTAs overlaid in paper-color. No stats and no scroll-cue in the hero itself. Immediately below: a compact ruled stat-strip row (the relocated stat trio) — the natural first thing in view on scroll. Then marquee trust bar (now including the SelectUSA line), Mission (01) with HOME-02 image and four pillars as a ruled 2×2, The Journey (02) with the Bridge line animation and four step thumbnails (HOME-03A–D), Programmes preview (03) as league-table rows linking to programmes.html, Impact snapshot (04) with roll-up numerals, Get Involved (05) three ruled columns — "Partner With Us," "Volunteer & Coach," "Enrol a Child" (no funding/backing language), Beyond Borders (06) as a full-bleed teal section replacing the old donate band, with real tournament photos (HOME-04A/B), the Rerhe quote, and "what's next" content, linking to the Beyond Borders article, footer.
+- **about.html** — Story hero with ABOUT-01, mission/vision as two ruled columns with the pull quote set huge in Oswald, six values as a 3×2 ruled grid, timeline as a vertical halfway-line with year markers in circles including the new "What's next" expansion-cities entry, team grid (duotone, square crops, existing placeholders).
+- **programmes.html** — Six programmes as alternating editorial rows with PROG-01–06 images: index number, Oswald title, body, stat line in mono, image. Each row separated by halfway-line dividers. Deep-linkable from the index league table (existing anchors preserved).
+- **impact.html** — Big-numeral stat sheet (league-table), outcomes as ruled rows, featured story as a teal full-bleed section with the quote in large Oswald plus IMPACT-01 image, SDG alignment as a mono-labeled grid of six.
+- **news.html / article pages** — The site already has a feature block + ruled-row listing and freshly-authored placeholder articles (PROJECT_LOG.md §7 item 4). Replace ONE of those placeholder articles with the real Beyond Borders story per CONTENT.md (pick the most generic one to repurpose, or add it as the featured block if that slot is free) — add NEWS-01, ARTICLE-01–03 images. Other placeholder articles and their existing share-row treatment stay as-is.
+- **contact.html** — unchanged: two ruled columns (mono-labelled details + underline-style form), map embed, Formspree handler. No image required.
+- **privacy.html / terms.html / 404.html** — unchanged: narrow legal measure, mono section labels, center-circle "Out of Bounds" 404.
+
+**donate.html and thank-you.html are removed** — delete the files, the Paystack integration, and every reference to them (nav, footer, sitemap). See CLAUDE.md "Funding language" for the broader rule on money-related copy.
 
 ## 10. Relationship to the SBI store (sibling test)
 

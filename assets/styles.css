@@ -706,25 +706,25 @@ p { text-wrap: pretty; }
 /* ------------------------------------------------------------
    16. DONATE BAND — full-bleed teal-deep
    ------------------------------------------------------------ */
-.donate-band {
+.teal-band {
   background: var(--teal-deep);
   color: var(--paper);
   position: relative;
   overflow: hidden;
 }
-.donate-band .penalty-arc { z-index: 0; }
-.donate-band .wrap { position: relative; z-index: var(--z-base); }
-.donate-band h2 { font-size: var(--fs-head); max-width: 14em; }
-.donate-band p { color: rgba(250, 247, 241, 0.88); max-width: 56ch; margin-top: 1.5rem; }
-.donate-band .band-grid {
+.teal-band .penalty-arc { z-index: 0; }
+.teal-band .wrap { position: relative; z-index: var(--z-base); }
+.teal-band h2 { font-size: var(--fs-head); max-width: 14em; }
+.teal-band p { color: rgba(250, 247, 241, 0.88); max-width: 56ch; margin-top: 1.5rem; }
+.teal-band .band-grid {
   display: grid;
   grid-template-columns: repeat(12, 1fr);
   gap: 2rem var(--gutter);
   align-items: end;
 }
-.donate-band .band-copy { grid-column: 1 / 9; }
-.donate-band .band-cta { grid-column: 10 / 13; display: flex; justify-content: flex-end; }
-.donate-band .kicker { color: var(--paper); display: block; margin-bottom: 1.25rem; }
+.teal-band .band-copy { grid-column: 1 / 9; }
+.teal-band .band-cta { grid-column: 10 / 13; display: flex; justify-content: flex-end; }
+.teal-band .kicker { color: var(--paper); display: block; margin-bottom: 1.25rem; }
 
 /* ------------------------------------------------------------
    17. FOOTER — broadsheet colophon
@@ -952,8 +952,8 @@ p { text-wrap: pretty; }
   .involve-col { padding-left: 0; padding-right: 0; }
   .involve-col + .involve-col { border-left: 0; border-top: var(--line-soft); }
 
-  .donate-band .band-copy, .donate-band .band-cta { grid-column: 1 / -1; }
-  .donate-band .band-cta { justify-content: flex-start; }
+  .teal-band .band-copy, .teal-band .band-cta { grid-column: 1 / -1; }
+  .teal-band .band-cta { justify-content: flex-start; }
 
   .foot-grid { grid-template-columns: 1fr 1fr; }
 
@@ -1578,3 +1578,240 @@ p { text-wrap: pretty; }
   .prog-idx { display: none; }
   .prog-main { grid-column: 1 / 13 !important; }
 }
+
+/* ============================================================
+   35. MIGRATION ADDITIONS — video hero, stat strip, section
+       imagery, journey thumbs, Beyond Borders, paper duotone
+   ============================================================ */
+
+/* 35.1 Paper-tone duotone — for photos sitting ON teal sections.
+   Shadows resolve to paper, not teal, so the image reads LIGHTER than
+   the teal band (teal-on-teal would disappear). */
+.duotone-paper { position: relative; overflow: hidden; background: var(--paper); }
+.duotone-paper img {
+  width: 100%; height: 100%; object-fit: cover;
+  filter: grayscale(1) contrast(1.02) brightness(1.06);
+  mix-blend-mode: luminosity;
+}
+.duotone-paper::after {
+  content: "";
+  position: absolute; inset: 0;
+  background: var(--teal);
+  mix-blend-mode: multiply;
+  opacity: 0.16;
+  pointer-events: none;
+}
+
+/* 35.2 VIDEO HERO — full-viewport ambient background, paper text on top */
+.hero-video {
+  position: relative;
+  overflow: hidden;
+  background: var(--ink);
+  color: var(--paper);
+  min-height: clamp(34rem, 86vh, 52rem);
+  display: flex;
+  align-items: center;
+  padding-block: clamp(3rem, 7vw, 6rem);
+}
+.hero-media { position: absolute; inset: 0; z-index: 0; }
+.hero-bg {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+  filter: grayscale(1) contrast(1.04);
+}
+.hero-tint { position: absolute; inset: 0; }
+.hero-tint::before {
+  content: "";
+  position: absolute; inset: 0;
+  background: var(--teal-deep);
+  mix-blend-mode: multiply;
+  opacity: 0.74;            /* heavy — ambient texture, not "watch this" */
+}
+.hero-tint::after {
+  content: "";
+  position: absolute; inset: 0;
+  background: linear-gradient(180deg, rgba(16,23,20,0.42), rgba(16,23,20,0.58));
+}
+.hero-video .hero-inner { position: relative; z-index: var(--z-base); width: 100%; }
+.hero-video .touchline { z-index: var(--z-base); }
+.hero-video .touchline-rect rect { stroke: var(--paper); }
+.hero-video .corner { border-color: var(--paper) !important; }
+.hero-video .hero-kicker,
+.hero-video .hero-headline { color: var(--paper); }
+.hero-video .hero-lede { color: rgba(250, 247, 241, 0.92); }
+/* CTAs on the dark video */
+.hero-video .btn-ink { border-color: var(--paper); }
+.hero-video .btn-ghost { color: var(--paper); border-color: var(--paper); }
+.hero-video .btn-ghost::before { background: var(--pink); }   /* the one sanctioned pink hover */
+.hero-video .btn-ghost:hover, .hero-video .btn-ghost:focus-visible { color: var(--ink); border-color: var(--pink); }
+
+/* 35.3 STAT STRIP — relocated trio, ruled row directly below hero */
+.stat-strip { border-bottom: var(--line); }
+.stat-strip-inner {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}
+.stat-strip .stat { padding: clamp(1.5rem, 3vw, 2.25rem) clamp(1rem, 3vw, 2.5rem); }
+.stat-strip .stat + .stat { position: relative; }
+.stat-strip .stat + .stat::before {
+  content: "";
+  position: absolute;
+  left: 0; top: 0.7rem; bottom: 0.7rem;
+  border-left: var(--line-soft);
+}
+
+/* 35.4 SECTION FIGURES — framed photography */
+.fig-frame { position: relative; border: var(--line-soft); }
+.fig-frame .corner { width: 20px; height: 20px; }
+.mission-figure .duotone { aspect-ratio: 4 / 5; }
+.about-figure .duotone { aspect-ratio: 16 / 9; }
+
+/* 35.5 JOURNEY STEP THUMBNAILS (1:1) */
+.j-thumb { margin-top: 1.25rem; border: var(--line-soft); }
+.j-thumb .duotone { aspect-ratio: 1 / 1; }
+@media (max-width: 900px) {
+  .j-thumb { max-width: 16rem; }
+}
+
+/* 35.6 PROGRAMME ROW IMAGERY — alternating left/right */
+.prog-row { align-items: center; }
+.prog-figure { grid-column: 9 / 13; }
+.prog-row:nth-of-type(even) .prog-figure { grid-column: 1 / 5; grid-row: 1; }
+.prog-figure .duotone { aspect-ratio: 3 / 2; }
+.prog-figure.fig-frame .corner { width: 18px; height: 18px; }
+@media (max-width: 900px) {
+  .prog-figure, .prog-row:nth-of-type(even) .prog-figure { grid-column: 1 / 13; grid-row: auto; }
+}
+
+/* 35.7 IMPACT featured-story image (on teal band) */
+.story-band .story-grid {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: clamp(2rem, 5vw, 4rem);
+  align-items: center;
+}
+.story-figure-impact .duotone-paper { aspect-ratio: 4 / 5; border: var(--line-paper); }
+@media (max-width: 900px) {
+  .story-band .story-grid { grid-template-columns: 1fr; }
+  .story-figure-impact { order: -1; max-width: 22rem; }
+}
+
+/* 35.8 BEYOND BORDERS (index 06) — teal storytelling band */
+.bb-head { max-width: 22ch; }
+.bb-lead { color: rgba(250, 247, 241, 0.92); max-width: 60ch; margin-top: 1.5rem; font-size: 1.125rem; }
+.bb-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(2rem, 5vw, 4rem);
+  margin-top: clamp(2.5rem, 5vw, 4rem);
+  align-items: start;
+}
+.bb-quote {
+  font-family: var(--font-display);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: -0.01em;
+  line-height: 1.06;
+  font-size: clamp(1.5rem, 2.8vw, 2.25rem);
+}
+.bb-quote cite {
+  display: block;
+  margin-top: 1.25rem;
+  font-family: var(--font-mono);
+  font-size: var(--fs-mono);
+  font-style: normal;
+  letter-spacing: 0.06em;
+  color: rgba(250, 247, 241, 0.8);
+}
+.bb-context { color: rgba(250, 247, 241, 0.82); margin-top: 1.5rem; }
+.bb-next { margin-top: 2rem; }
+.bb-next .kicker { color: var(--paper); display: block; margin-bottom: 1rem; }
+.bb-next ul { list-style: none; }
+.bb-next li {
+  padding: 0.85rem 0;
+  border-top: 1px solid rgba(250, 247, 241, 0.22);
+  color: rgba(250, 247, 241, 0.92);
+  font-size: 0.975rem;
+}
+.bb-next li:last-child { border-bottom: 1px solid rgba(250, 247, 241, 0.22); }
+.bb-media { display: grid; gap: var(--gutter); }
+.bb-media .bb-a .duotone-paper { aspect-ratio: 3 / 2; }
+.bb-media .bb-b .duotone-paper { aspect-ratio: 4 / 5; max-width: 20rem; }
+.bb-cta { margin-top: clamp(2.5rem, 5vw, 3.5rem); }
+@media (max-width: 900px) {
+  .bb-grid { grid-template-columns: 1fr; }
+  .bb-media { grid-template-columns: 1fr 1fr; }
+  .bb-media .bb-b .duotone-paper { max-width: none; }
+}
+@media (max-width: 480px) {
+  .bb-media { grid-template-columns: 1fr; }
+  .stat-strip-inner { grid-template-columns: 1fr; }
+  .stat-strip .stat + .stat::before { display: none; }
+  .stat-strip .stat + .stat { border-top: var(--line-soft); }
+}
+
+/* 35.9 News feature image */
+.news-feature-figure { aspect-ratio: 16 / 9; border: var(--line-soft); margin-bottom: 1.75rem; overflow: hidden; }
+.news-feature-figure img { width: 100%; height: 100%; object-fit: cover; }
+
+/* 35.10 Article inline figures (Beyond Borders) */
+.article-figure { margin: 2.5rem 0; border: var(--line-soft); }
+.article-figure .duotone { aspect-ratio: 16 / 9; }
+.article-figure figcaption {
+  font-family: var(--font-mono); font-size: 0.72rem; text-transform: uppercase;
+  letter-spacing: 0.06em; color: var(--ink-soft);
+  padding: 0.75rem 1rem; border-top: var(--line-soft);
+}
+.article-figure-pair { display: grid; grid-template-columns: 1fr 1fr; gap: var(--gutter); margin: 2.5rem 0; }
+.article-figure-pair .duotone { aspect-ratio: 4 / 3; border: var(--line-soft); }
+@media (max-width: 600px) { .article-figure-pair { grid-template-columns: 1fr; } }
+
+/* ------------------------------------------------------------
+   36. NAV CTA — keep on one line; tighter on mobile
+   ------------------------------------------------------------ */
+.btn { white-space: nowrap; }
+@media (max-width: 900px) {
+  .nav-cta { padding: 0.55em 1em; font-size: 0.72rem; }
+  .site-header .nav-bar { min-height: 64px; }
+}
+
+/* ------------------------------------------------------------
+   37. SWAP REVIEW NOTES — owner-facing placeholder annotations.
+   Deliberately visible + distinct so they're easy to spot and
+   remove once real photography lands. (Temporary, pre-launch.)
+   ------------------------------------------------------------ */
+.swap-note {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  line-height: 1.45;
+  letter-spacing: 0.01em;
+  color: var(--teal-deep);
+  background: rgba(212, 83, 126, 0.07);
+  border: 1px dashed rgba(212, 83, 126, 0.55);
+  padding: 0.5rem 0.7rem;
+  margin-top: 0.6rem;
+}
+.swap-note::before {
+  content: "✎ Note — ";
+  color: var(--pink);
+  font-weight: 500;
+}
+.on-teal .swap-note,
+.teal-band .swap-note {
+  color: var(--paper);
+  background: rgba(250, 247, 241, 0.1);
+  border-color: rgba(250, 247, 241, 0.5);
+}
+.on-teal .swap-note::before,
+.teal-band .swap-note::before { color: var(--paper); }
+
+/* ------------------------------------------------------------
+   38. HERO TOUCHLINE — clean sharp-cornered frame
+   The inset corner-arc spans read as disconnected (each line
+   stopped short of the corner, bridged by an inward arc). A pitch
+   boundary is a crisp rectangle, so drop the arcs on the hero and
+   keep the drawn rectangle. (Card corner-ticks elsewhere unaffected.)
+   ------------------------------------------------------------ */
+.hero .touchline .corner { display: none !important; }
