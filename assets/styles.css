@@ -1816,3 +1816,77 @@ p { text-wrap: pretty; }
    keep the drawn rectangle. (Card corner-ticks elsewhere unaffected.)
    ------------------------------------------------------------ */
 .hero .touchline .corner { display: none !important; }
+
+/* ------------------------------------------------------------
+   40. CHANGE BRIEF — mission band, programme inline-image reveal,
+       impact featured-story portrait strip
+   ------------------------------------------------------------ */
+
+/* 40.1 Mission — full-width cinematic band (HOME-02) */
+.mission-band { aspect-ratio: 16 / 6; border: var(--line-soft); }
+.mission-band img { width: 100%; height: 100%; object-fit: cover; }
+.mission-copy { max-width: 68ch; }
+
+/* 40.2 Programme rows — inline image reveal inside the title */
+.prog-img-slot {
+  display: inline-block;
+  width: 0;
+  height: 1em;            /* matches row cap height */
+  overflow: hidden;
+  vertical-align: middle;
+  transition: width 280ms var(--ease-athletic), margin 280ms var(--ease-athletic);
+}
+.fixture:hover .prog-img-slot,
+.fixture:focus-visible .prog-img-slot { width: 56px; margin: 0 8px; }
+.prog-img-slot img { width: 56px; height: 100%; object-fit: cover; display: block; }
+@media (max-width: 480px) { .prog-img-slot { display: none !important; } }
+
+/* 40.3 Impact featured story — full-bleed photo as faint background texture */
+.story-band {
+  position: relative;
+  overflow: hidden;
+  padding-block: clamp(3.5rem, 8vw, 6rem);
+  min-height: 360px;
+  display: flex;
+  align-items: center;
+}
+.story-bg { position: absolute; inset: 0; overflow: hidden; }
+.story-bg img {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover; display: block;
+  mix-blend-mode: multiply;
+  opacity: 0.2;
+}
+.story-content { position: relative; z-index: var(--z-base); }
+.story-content figure { margin: 0; max-width: 48rem; }
+
+/* 40.4 Beyond Borders — full-bleed hero (04A) with overlaid eyebrow/heading,
+   then wrapped body with content left + small inset (04B) right */
+.bb-hero { position: relative; width: 100%; aspect-ratio: 16 / 6; overflow: hidden; }
+.bb-hero img {
+  position: absolute; inset: 0; width: 100%; height: 100%;
+  object-fit: cover; filter: grayscale(1) contrast(1.02); display: block;
+}
+.bb-hero__overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(180deg, rgba(8, 80, 65, 0.28), rgba(8, 80, 65, 0.66));
+}
+.bb-hero__text { position: absolute; left: 0; right: 0; bottom: 0; z-index: 1; padding: clamp(1.5rem, 4vw, 2.75rem); }
+.bb-hero__text .kicker { color: #9FE1CB; display: block; margin-bottom: 0.85rem; }
+.bb-hero__text h2 { color: var(--paper); font-size: clamp(1.8rem, 4.5vw, 3.75rem); max-width: 22ch; margin: 0; }
+
+.bb-body { display: flex; gap: clamp(2rem, 4vw, 3rem); align-items: flex-start; padding-block: clamp(2.5rem, 5vw, 3.75rem); }
+.bb-body__left { flex: 1; min-width: 0; }
+.bb-body__left .bb-lead { margin-top: 0; }
+.bb-body__right { flex-shrink: 0; width: 280px; }
+.bb-inset { width: 100%; aspect-ratio: 3 / 4; }
+
+@media (max-width: 900px) {
+  .bb-body { flex-direction: column; }
+  .bb-body__right { width: 100%; max-width: 320px; }
+}
+@media (max-width: 480px) {
+  .bb-hero { aspect-ratio: 16 / 9; }
+  .bb-inset { aspect-ratio: 16 / 9; }
+}
