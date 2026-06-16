@@ -1921,3 +1921,27 @@ p { text-wrap: pretty; }
 /* 42. Parent-company name links (Sports Bridge International → sportsbridgeintl.com) */
 .sbi-link { color: var(--teal-deep); text-decoration-thickness: 1.5px; text-underline-offset: 3px; }
 .sbi-link:hover, .sbi-link:focus-visible { color: var(--ink); }
+
+/* ------------------------------------------------------------
+   43. BEYOND BORDERS CAROUSEL — 6-image CSS crossfade.
+   No JS, no scroll-snap. Slides inherit the .bb-hero img treatment
+   (absolute, cover, grayscale) so the band stays full-bleed and
+   identical in dimensions to the single-image hero it replaces.
+   ------------------------------------------------------------ */
+.bb-slide { opacity: 0; animation: bb-cross 36s linear infinite; }
+.bb-slide-2 { animation-delay: 6s; }
+.bb-slide-3 { animation-delay: 12s; }
+.bb-slide-4 { animation-delay: 18s; }
+.bb-slide-5 { animation-delay: 24s; }
+.bb-slide-6 { animation-delay: 30s; }
+@keyframes bb-cross {
+  0%    { opacity: 0; }
+  2.5%  { opacity: 1; }
+  16.6% { opacity: 1; }
+  19.1% { opacity: 0; }
+  100%  { opacity: 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .bb-slide { animation: none; opacity: 0; }
+  .bb-slide-1 { opacity: 1; }
+}
