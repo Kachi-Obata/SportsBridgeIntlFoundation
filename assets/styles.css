@@ -1917,3 +1917,7 @@ p { text-wrap: pretty; }
 .foot-social { min-width: 44px; min-height: 44px; justify-content: center; }
 .foot-meta a, .foot-bottom a { display: inline-block; padding-block: 0.4rem; }
 .foot-col a { padding-block: 0.5rem; }
+
+/* 42. Parent-company name links (Sports Bridge International → sportsbridgeintl.com) */
+.sbi-link { color: var(--teal-deep); text-decoration-thickness: 1.5px; text-underline-offset: 3px; }
+.sbi-link:hover, .sbi-link:focus-visible { color: var(--ink); }
