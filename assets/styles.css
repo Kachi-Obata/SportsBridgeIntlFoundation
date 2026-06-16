@@ -1700,7 +1700,7 @@ p { text-wrap: pretty; }
 
 /* 35.8 BEYOND BORDERS (index 06) — teal storytelling band */
 .bb-head { max-width: 22ch; }
-.bb-lead { color: rgba(250, 247, 241, 0.92); max-width: 60ch; margin-top: 1.5rem; font-size: 1.375rem; }
+.bb-lead { color: rgba(250, 247, 241, 0.92); max-width: 60ch; margin-top: 1.5rem; font-size: inherit; }
 .bb-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -1715,6 +1715,7 @@ p { text-wrap: pretty; }
   letter-spacing: -0.01em;
   line-height: 1.06;
   font-size: clamp(1.5rem, 2.8vw, 2.25rem);
+  margin-top: clamp(1.75rem, 3vw, 2.5rem);
 }
 .bb-quote cite {
   display: block;
@@ -1822,10 +1823,28 @@ p { text-wrap: pretty; }
        impact featured-story portrait strip
    ------------------------------------------------------------ */
 
-/* 40.1 Mission — full-width cinematic band (HOME-02) */
+/* 40.1 Mission — full-width cinematic band (HOME-02).
+   Desktop: band on top, title below on paper. Mobile: tall image with
+   the eyebrow + heading overlaid (mirrors the Beyond Borders hero). */
 .mission-band { aspect-ratio: 16 / 6; border: var(--line-soft); }
 .mission-band img { width: 100%; height: 100%; object-fit: cover; }
 .mission-copy { max-width: 68ch; }
+.mission-hero__overlay { display: none; }
+.mission-hero__title { margin-top: var(--space-head); }
+@media (max-width: 480px) {
+  .mission-hero { position: relative; }
+  .mission-band { aspect-ratio: 4 / 5; }
+  .mission-hero__overlay {
+    display: block; position: absolute; inset: 0; z-index: 1; pointer-events: none;
+    background: linear-gradient(180deg, rgba(16, 23, 20, 0) 34%, rgba(16, 23, 20, 0.8));
+  }
+  .mission-hero__title {
+    position: absolute; left: 0; right: 0; bottom: 0; z-index: 2;
+    margin: 0; padding: clamp(1.25rem, 5vw, 1.75rem);
+  }
+  .mission-hero__title .kicker { color: var(--paper); }
+  .mission-hero__title h2 { color: var(--paper); font-size: clamp(1.9rem, 7.5vw, 2.6rem); max-width: none; }
+}
 
 /* 40.2 Programme rows — inline image reveal inside the title */
 .prog-img-slot {
@@ -1859,7 +1878,8 @@ p { text-wrap: pretty; }
   opacity: 0.2;
 }
 .story-content { position: relative; z-index: var(--z-base); }
-.story-content figure { margin: 0; max-width: 48rem; }
+.story-content figure { margin: 0; max-width: none; }
+.story-content blockquote { max-width: none; }
 
 /* 40.4 Beyond Borders — full-bleed hero (04A) with overlaid eyebrow/heading,
    then wrapped body with content left + small inset (04B) right */
@@ -1887,6 +1907,13 @@ p { text-wrap: pretty; }
   .bb-body__right { width: 100%; max-width: 320px; }
 }
 @media (max-width: 480px) {
-  .bb-hero { aspect-ratio: 16 / 9; }
+  .bb-hero { aspect-ratio: 4 / 5; }
   .bb-inset { aspect-ratio: 16 / 9; }
 }
+
+/* ------------------------------------------------------------
+   41. ACCESSIBILITY — minimum tap-target sizes (WCAG 2.5.8)
+   ------------------------------------------------------------ */
+.foot-social { min-width: 44px; min-height: 44px; justify-content: center; }
+.foot-meta a, .foot-bottom a { display: inline-block; padding-block: 0.4rem; }
+.foot-col a { padding-block: 0.5rem; }
