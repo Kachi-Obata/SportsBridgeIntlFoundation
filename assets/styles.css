@@ -35,6 +35,7 @@
   --fs-head-sm:   clamp(1.75rem, 3.2vw, 2.75rem);
   --fs-stat:      clamp(2.5rem, 5.5vw, 5rem);
   --fs-mono:      0.8125rem;
+  --fs-label:     1.0625rem;  /* content pseudo-headings — kickers, stat labels */
 
   /* Rhythm */
   --space-section: clamp(5rem, 11vw, 11rem);
@@ -64,7 +65,7 @@ html { scroll-behavior: smooth; }
 
 body {
   font-family: var(--font-body);
-  font-size: 1.0625rem;
+  font-size: 1.375rem;
   line-height: 1.6;
   color: var(--ink);
   background: var(--paper);
@@ -106,7 +107,7 @@ p { text-wrap: pretty; }
 
 .kicker {
   font-family: var(--font-mono);
-  font-size: var(--fs-mono);
+  font-size: var(--fs-label);
   font-weight: 500;
   text-transform: uppercase;
   letter-spacing: 0.08em;
@@ -461,7 +462,7 @@ p { text-wrap: pretty; }
 }
 .stat-l {
   font-family: var(--font-mono);
-  font-size: var(--fs-mono);
+  font-size: var(--fs-label);
   text-transform: uppercase;
   letter-spacing: 0.08em;
   color: var(--ink-soft);
@@ -553,7 +554,7 @@ p { text-wrap: pretty; }
   font-size: 1.5rem;
   letter-spacing: 0;
 }
-.pillar p { color: var(--ink-soft); margin-top: 0.6rem; font-size: 1rem; max-width: 34ch; }
+.pillar p { color: var(--ink-soft); margin-top: 0.6rem; font-size: 1.1875rem; max-width: 34ch; }
 .pillar .kicker { color: var(--teal-deep); display: block; margin-bottom: 0.85rem; }
 
 /* ------------------------------------------------------------
@@ -613,7 +614,7 @@ p { text-wrap: pretty; }
 }
 .journey-step p {
   color: var(--ink-soft);
-  font-size: 0.975rem;
+  font-size: 1.0625rem;
   margin-top: 0.6rem;
   max-width: 30ch;
   margin-inline: auto;
@@ -696,7 +697,7 @@ p { text-wrap: pretty; }
 .involve-col ul { list-style: none; margin: 1.25rem 0 2rem; flex: 1; }
 .involve-col li {
   color: var(--ink-soft);
-  font-size: 0.975rem;
+  font-size: 1.0625rem;
   padding-block: 0.7rem;
   border-top: var(--line-soft);
 }
@@ -741,7 +742,7 @@ p { text-wrap: pretty; }
   padding-block: clamp(3rem, 6vw, 4.5rem);
 }
 .foot-brand img { height: 48px; width: auto; margin-bottom: 1.25rem; }
-.foot-brand p { color: var(--ink-soft); font-size: 0.95rem; max-width: 36ch; }
+.foot-brand p { color: var(--ink-soft); font-size: 1.0625rem; max-width: 36ch; }
 .foot-col h2 {
   font-family: var(--font-mono);
   font-size: var(--fs-mono);
@@ -752,20 +753,20 @@ p { text-wrap: pretty; }
 }
 .foot-col a {
   display: block;
-  font-size: 0.95rem;
+  font-size: 1.0625rem;
   color: var(--ink-soft);
   text-decoration: none;
   padding-block: 0.3rem;
 }
 .foot-col a:hover, .foot-col a:focus-visible { color: var(--teal-deep); }
 
-.foot-news p { font-size: 0.9rem; color: var(--ink-soft); margin-top: 1rem; }
+.foot-news p { font-size: 1rem; color: var(--ink-soft); margin-top: 1rem; }
 .foot-news .news-row { display: flex; gap: 0; border-bottom: var(--line); }
 .foot-news input {
   flex: 1;
   min-width: 0;
   font: inherit;
-  font-size: 0.95rem;
+  font-size: 1.0625rem;
   color: var(--ink);
   background: transparent;
   border: 0;
@@ -822,7 +823,7 @@ p { text-wrap: pretty; }
 .page-hero .kicker { display: block; margin-bottom: 1.5rem; }
 .page-hero h1 { font-size: clamp(2.5rem, 6vw, 5.5rem); max-width: 14em; }
 .page-hero .lede {
-  font-size: 1.1875rem;
+  font-size: 1.5rem;
   color: var(--ink-soft);
   max-width: 58ch;
   margin-top: 2rem;
@@ -845,7 +846,7 @@ p { text-wrap: pretty; }
 .field input, .field select, .field textarea {
   width: 100%;
   font: inherit;
-  font-size: 1.0625rem;
+  font-size: 1.1875rem;
   color: var(--ink);
   background: transparent;
   border: 0;
@@ -962,7 +963,7 @@ p { text-wrap: pretty; }
 }
 
 @media (max-width: 480px) {
-  body { font-size: 1rem; }
+  body { font-size: 1.1875rem; }
 
   .hero-inner { padding-inline: clamp(1.5rem, 6vw, 2.5rem); }
   .hero-stats { grid-template-columns: 1fr; }
@@ -1037,7 +1038,7 @@ p { text-wrap: pretty; }
 }
 .mv-col { border-top: var(--line); padding-top: 1.5rem; }
 .mv-col .kicker { display: block; margin-bottom: 1rem; }
-.mv-col p { font-size: 1.1875rem; line-height: 1.55; }
+.mv-col p { font-size: 1.5rem; line-height: 1.55; }
 
 .pull-quote {
   font-family: var(--font-display);
@@ -1067,7 +1068,7 @@ p { text-wrap: pretty; }
   text-transform: uppercase;
   font-size: 1.375rem;
 }
-.value p { color: var(--ink-soft); font-size: 0.975rem; margin-top: 0.5rem; max-width: 34ch; }
+.value p { color: var(--ink-soft); font-size: 1.0625rem; margin-top: 0.5rem; max-width: 34ch; }
 
 /* Timeline — vertical halfway-line with year circles */
 .timeline {
@@ -1128,7 +1129,7 @@ p { text-wrap: pretty; }
   color: var(--teal-deep);
   margin-top: 0.3rem;
 }
-.member .bio { color: var(--ink-soft); font-size: 0.925rem; margin-top: 0.6rem; }
+.member .bio { color: var(--ink-soft); font-size: 1rem; margin-top: 0.6rem; }
 
 /* Story figure (about) */
 .story-figure { border: var(--line-soft); position: relative; }
@@ -1230,7 +1231,7 @@ p { text-wrap: pretty; }
   text-transform: uppercase;
   font-size: 1.375rem;
 }
-.sdg p { color: var(--ink-soft); font-size: 0.975rem; margin-top: 0.5rem; max-width: 36ch; }
+.sdg p { color: var(--ink-soft); font-size: 1.0625rem; margin-top: 0.5rem; max-width: 36ch; }
 
 .measure-cols { columns: 2; column-gap: calc(var(--gutter) * 1.5); max-width: 70rem; }
 .measure-cols p { break-inside: avoid; margin-bottom: 1.4rem; color: var(--ink-soft); }
@@ -1285,7 +1286,7 @@ p { text-wrap: pretty; }
   transition: color var(--t-fast) ease-out;
 }
 .news-item:hover h3 { color: var(--teal-deep); }
-.news-item p { color: var(--ink-soft); font-size: 0.95rem; margin-top: 0.4rem; max-width: 64ch; }
+.news-item p { color: var(--ink-soft); font-size: 1.0625rem; margin-top: 0.4rem; max-width: 64ch; }
 .news-item .news-meta span { display: block; }
 .news-item .fixture-arrow { align-self: center; }
 
@@ -1358,7 +1359,7 @@ p { text-wrap: pretty; }
 }
 .detail-list .detail-row:last-of-type { border-bottom: var(--line-soft); }
 .detail-row .kicker { color: var(--teal-deep); display: block; margin-bottom: 0.5rem; }
-.detail-row p { color: var(--ink-soft); font-size: 0.975rem; }
+.detail-row p { color: var(--ink-soft); font-size: 1.0625rem; }
 .detail-row a { color: var(--ink); }
 .cmap { border: var(--line-soft); margin-top: 2rem; background: var(--paper-dim); }
 .cmap iframe { width: 100%; height: 260px; border: 0; display: block; filter: grayscale(1); }
@@ -1699,7 +1700,7 @@ p { text-wrap: pretty; }
 
 /* 35.8 BEYOND BORDERS (index 06) — teal storytelling band */
 .bb-head { max-width: 22ch; }
-.bb-lead { color: rgba(250, 247, 241, 0.92); max-width: 60ch; margin-top: 1.5rem; font-size: 1.125rem; }
+.bb-lead { color: rgba(250, 247, 241, 0.92); max-width: 60ch; margin-top: 1.5rem; font-size: 1.375rem; }
 .bb-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -1732,7 +1733,7 @@ p { text-wrap: pretty; }
   padding: 0.85rem 0;
   border-top: 1px solid rgba(250, 247, 241, 0.22);
   color: rgba(250, 247, 241, 0.92);
-  font-size: 0.975rem;
+  font-size: 1.0625rem;
 }
 .bb-next li:last-child { border-bottom: 1px solid rgba(250, 247, 241, 0.22); }
 .bb-media { display: grid; gap: var(--gutter); }
