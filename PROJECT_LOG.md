@@ -197,4 +197,60 @@ Per `MIGRATION_BRIEF.md` + updated `DESIGN_BRIEF.md` / `CONTENT.md` / new `IMAGE
 - [ ] **Legal review** — privacy.html, terms.html
 - [ ] **Logo** — drop-in swap when the new logo arrives (markers in place)
 - [ ] **Vercel deploy + domain DNS**
+- [ ] **Gallery — 6 missing 2024 events** — add photos for squash-2024, squash-final-2024, squash-clinic-day1, squashtrivia-day4, squashtrivia-day5, squashtrivia-day6 (see gallery.html for stub-to-real template instructions)
+
+---
+
+# Update — 18 June 2026 (Gallery page)
+
+New page `gallery.html` added. Source photos processed from `SBI Foundation.zip` (iCloud Downloads, 384 MB).
+
+## What was built
+
+- **`gallery.html`** — full event photo gallery, year-segmented (2024 / 2026), with a sticky year jump-nav, per-event grids, and a vanilla JS lightbox (`<dialog>`-based, keyboard-navigable: ←/→/Esc, group-scoped prev/next, EXIF-free).
+- **Nav updated** across all 11 pages — Gallery link inserted between News and Contact.
+- **Footer "Explore" nav** updated across all pages that carry it (full-footer pages only; privacy/terms/404 use the simplified footer, correctly left unchanged).
+- **CSS section 44** added to `assets/styles.css` — gallery year nav, event headers, photo grid, thumbnail duotone hover, stub placeholder, lightbox dialog, `.sr-only` utility.
+- **Lightbox JS** appended to `assets/main.js` — also wires the sticky year-tab active-state via IntersectionObserver.
+
+## Source photos processed
+
+| Event | Source | Curated | Method |
+|---|---|---|---|
+| Badminton (May 2026) | 65 DSC JPGs | **11 selected** | PIL edge-variance sharpness; burst groups (gap ≤ 4 frames) reduced to best-per-burst, then top 11 by sharpness |
+| Squashtival 2024 Final Day | 13 ORC JPGs | **10 selected** | Same method; 3 near-duplicates dropped |
+
+Originals stay in `/tmp/sbi-gallery-work/` (not in repo). Repo only contains optimized web copies.
+
+## Optimized assets
+
+Stored at `assets/gallery/<slug>/full/` (1600px longest edge, Q82) and `/thumb/` (600px, Q75). EXIF stripped. PIL `exif_transpose` applied for correct orientation.
+
+- `assets/gallery/badminton-2026/` — 11 full + 11 thumb (310–376 KB full, 38–54 KB thumb)
+- `assets/gallery/squashtival-final-2024/` — 10 full + 10 thumb (143–292 KB full, 24–50 KB thumb)
+
+## Stub scaffolding (6 missing 2024 events)
+
+Stub directories created with `.gitkeep` files:
+
+| Slug | Display name |
+|---|---|
+| `squash-2024` | Squash 2024 |
+| `squash-final-2024` | Squash Final |
+| `squash-clinic-day1` | Squash Clinic — Day 1 |
+| `squashtrivia-day4` | Squashtrivia Camp — Day 4 |
+| `squashtrivia-day5` | Squashtrivia — Day 5 |
+| `squashtrivia-day6` | Squashtrivia — Day 6 |
+
+**To add a stub event's photos later:**
+1. Optimize originals → `assets/gallery/<slug>/full/` (1600px, Q82) and `/thumb/` (600px, Q75), named `01.jpg`, `02.jpg`, …
+2. In `gallery.html`, find the stub `<div class="gallery-event gallery-event-stub" id="event-<slug>">` block.
+3. Replace it with a real event block — use the Squashtival Final Day block as the exact template (it has the full `<ul class="gallery-grid">` structure and all required `data-*` attributes).
+4. Update the count in the meta line and increment the `data-index` values from 0.
+
+## Deviations
+
+1. **Year order** — gallery shows 2024 first (per user's specified order), 2026 second. Within 2024, user's chronological order followed (Squash 2024 earliest → Squashtival Final Day latest).
+2. **Year headings** — using large ghosted Oswald numerals rather than the divider-badge circles used elsewhere; more readable at a glance for a year-segmented archive. Badge circles are used within other pages only between same-page sections.
+3. **Stub-first 2024 section** — 6 stubs appear before the real Squashtival photos, following chronological order. When the other 6 events are filled in, the full 2024 section will read correctly in sequence.
 - [x] ~~Paystack live key~~ — removed; no payments on the site
