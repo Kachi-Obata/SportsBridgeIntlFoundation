@@ -171,21 +171,55 @@
       if (e.key === "ArrowRight")  { lbShow(lbIdx + 1); }
     });
 
-    /* Gallery year-tab active-state on scroll */
-    var yearSections = document.querySelectorAll(".gallery-year-section");
-    var yearTabs     = document.querySelectorAll(".gallery-year-tab");
-    if (yearSections.length && yearTabs.length && "IntersectionObserver" in window) {
-      var tabObserver = new IntersectionObserver(function (entries) {
-        entries.forEach(function (entry) {
-          if (entry.isIntersecting) {
-            var id = entry.target.id;
-            yearTabs.forEach(function (tab) {
-              tab.setAttribute("aria-current", tab.getAttribute("href") === "#" + id ? "true" : "false");
-            });
+    /* Gallery year tabs — one year visible at a time */
+    var yearTablist = document.querySelector(".gallery-year-nav [role='tablist']");
+    if (yearTablist) {
+      var yearTabs    = Array.from(yearTablist.querySelectorAll("[role='tab']"));
+      var yearPanels  = yearTabs.map(function (t) { return document.getElementById(t.getAttribute("aria-controls")); });
+
+      function activateYear(targetTab, updateHash) {
+        yearTabs.forEach(function (tab, i) {
+          var isActive = tab === targetTab;
+          tab.setAttribute("aria-selected", isActive ? "true" : "false");
+          tab.setAttribute("tabindex", isActive ? "0" : "-1");
+          if (yearPanels[i]) {
+            yearPanels[i].classList.toggle("is-active", isActive);
           }
         });
-      }, { threshold: 0.3 });
-      yearSections.forEach(function (s) { tabObserver.observe(s); });
+        if (updateHash) {
+          history.replaceState(null, "", "#" + targetTab.getAttribute("aria-controls"));
+        }
+      }
+
+      /* Pick initial tab: hash match, else default to last tab (most recent year) */
+      var initHash = location.hash.replace("#", "");
+      var initTab  = yearTabs.find(function (t) { return t.getAttribute("aria-controls") === initHash; })
+                     || yearTabs[yearTabs.length - 1];
+      activateYear(initTab, false);
+
+      /* Click */
+      yearTabs.forEach(function (tab) {
+        tab.addEventListener("click", function () { activateYear(tab, true); });
+      });
+
+      /* Arrow key roving tabindex (Left/Right/Home/End) */
+      yearTablist.addEventListener("keydown", function (e) {
+        var idx = yearTabs.indexOf(document.activeElement);
+        if (idx === -1) return;
+        var next;
+        if      (e.key === "ArrowRight") { next = yearTabs[(idx + 1) % yearTabs.length]; }
+        else if (e.key === "ArrowLeft")  { next = yearTabs[(idx - 1 + yearTabs.length) % yearTabs.length]; }
+        else if (e.key === "Home")       { next = yearTabs[0]; }
+        else if (e.key === "End")        { next = yearTabs[yearTabs.length - 1]; }
+        if (next) { e.preventDefault(); activateYear(next, true); next.focus(); }
+      });
+
+      /* Browser back/forward */
+      window.addEventListener("hashchange", function () {
+        var h = location.hash.replace("#", "");
+        var match = yearTabs.find(function (t) { return t.getAttribute("aria-controls") === h; });
+        if (match) activateYear(match, false);
+      });
     }
   }
 })();

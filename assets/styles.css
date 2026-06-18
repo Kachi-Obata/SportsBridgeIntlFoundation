@@ -1964,6 +1964,14 @@ p { text-wrap: pretty; }
   padding-block: 0;
 }
 .gallery-year-tab {
+  /* button reset */
+  appearance: none;
+  background: none;
+  border-top: none;
+  border-left: none;
+  border-radius: 0;
+  cursor: pointer;
+  /* design */
   font-family: var(--font-mono);
   font-size: var(--fs-mono);
   font-weight: 500;
@@ -1980,10 +1988,15 @@ p { text-wrap: pretty; }
   color: var(--ink);
   background: var(--paper-dim);
 }
-.gallery-year-tab[aria-current="true"] {
+.gallery-year-tab[aria-selected="true"] {
   color: var(--ink);
   border-bottom-color: var(--ink);
 }
+
+/* Tab panels: JS hides inactive panels via .is-active class.
+   No-JS fallback: .js class is never added, all panels remain visible. */
+.js .gallery-year-section          { display: none; }
+.js .gallery-year-section.is-active { display: block; }
 @media (max-width: 900px) {
   .gallery-year-nav { top: 64px; }
 }

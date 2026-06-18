@@ -50,11 +50,11 @@
     <hr class="page-hero-rule">
   </section>
 
-  <nav class="gallery-year-nav" aria-label="Jump to year">
-    <div class="wrap">
-      <a href="#y2023" class="gallery-year-tab" aria-current="true">2023</a>
-      <a href="#y2024" class="gallery-year-tab">2024</a>
-      <a href="#y2026" class="gallery-year-tab">2026</a>
+  <nav class="gallery-year-nav" aria-label="Filter photos by year">
+    <div class="wrap" role="tablist" aria-label="Filter photos by year">
+      <button class="gallery-year-tab" role="tab" id="tab-y2023" aria-selected="false" aria-controls="y2023" tabindex="-1">2023</button>
+      <button class="gallery-year-tab" role="tab" id="tab-y2024" aria-selected="false" aria-controls="y2024" tabindex="-1">2024</button>
+      <button class="gallery-year-tab" role="tab" id="tab-y2026" aria-selected="true"  aria-controls="y2026" tabindex="0">2026</button>
     </div>
   </nav>
 
@@ -64,7 +64,7 @@
        SWAP: once specific event names are known, split this single block
        into multiple .gallery-event blocks (use 2024 as the template).
        =================================================================== -->
-  <section class="section gallery-year-section" id="y2023" aria-labelledby="y2023-h">
+  <section class="section gallery-year-section" id="y2023" role="tabpanel" aria-labelledby="tab-y2023" tabindex="-1">
     <div class="wrap">
       <header class="gallery-year-header">
         <h2 class="gallery-year-heading" id="y2023-h">2023</h2>
@@ -114,7 +114,7 @@
   <!-- ===================================================================
        2024 — seven events (six stubs + one real)
        =================================================================== -->
-  <section class="section gallery-year-section" id="y2024" aria-labelledby="y2024-h">
+  <section class="section gallery-year-section" id="y2024" role="tabpanel" aria-labelledby="tab-y2024" tabindex="-1">
     <div class="wrap">
       <header class="gallery-year-header">
         <h2 class="gallery-year-heading" id="y2024-h">2024</h2>
@@ -292,7 +292,7 @@
   <!-- ===================================================================
        2026 — Badminton (17 photos)
        =================================================================== -->
-  <section class="section gallery-year-section" id="y2026" aria-labelledby="y2026-h">
+  <section class="section gallery-year-section" id="y2026" role="tabpanel" aria-labelledby="tab-y2026" tabindex="-1">
     <div class="wrap">
       <header class="gallery-year-header">
         <h2 class="gallery-year-heading" id="y2026-h">2026</h2>
