@@ -2466,7 +2466,11 @@ p { text-wrap: pretty; }
 
 /* Per-logo size overrides — square/badge marks need more height to read at the same visual weight as wide wordmarks */
 .logo-wall-item--tall .logo-wall-img     { height: 68px; max-width: 200px; }
-@media (max-width: 480px) { .logo-wall-item--tall .logo-wall-img { height: 52px; } }
+.logo-wall-item--xl   .logo-wall-img     { height: 88px; max-width: 200px; }
+@media (max-width: 480px) {
+  .logo-wall-item--tall .logo-wall-img { height: 52px; }
+  .logo-wall-item--xl   .logo-wall-img { height: 64px; }
+}
 
 @media (max-width: 480px) {
   .logo-wall { gap: 1.5rem 2rem; }
