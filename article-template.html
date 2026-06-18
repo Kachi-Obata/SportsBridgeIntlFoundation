@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<!--
+  ============================================================
+  POST TEMPLATE — Sports Bridge International Foundation Blog
+  ============================================================
+
+  HOW TO ADD A NEW POST:
+  1. Copy this file:  cp article-template.html post-your-slug.html
+     Slug convention: post-[topic-kebab-case].html
+     e.g. post-squashtival-2024-recap.html
+
+  2. Update the <head> section:
+     - <title>           → "Your Post Title — Sports Bridge International Foundation"
+     - <meta description> → 1–2 sentence summary (used in search results + social previews)
+     - <link rel="canonical"> → full URL of the new post
+     - og:title / og:description / og:url → match the above
+     - og:image → swap in a real OG image once available
+
+  3. Update the breadcrumb kicker (line marked POST CATEGORY):
+     e.g.  Blog / Impact Story   |   Blog / Events   |   Blog / Programme News
+
+  4. Update the <h1> (POST TITLE), byline (POST BYLINE + DATE), and read time.
+
+  5. Replace content between POST BODY START and POST BODY END.
+     Standard content blocks available (copy from here or other articles):
+       • <p>           — body paragraph
+       • <h2>          — section heading
+       • <blockquote class="lead-quote">  — pull quote
+       • <figure>...<figcaption> — single image with caption
+       • <div class="article-figure-pair">  — two-up image pair
+       • <p><em>...</em></p>  — closing note / call to action
+
+  6. Update share links (3 places — look for POST SHARE LINKS):
+     Replace the encoded URL in each href with the real post URL.
+
+  7. Add a card to blog.html:
+     - Copy one .blog-card block from blog.html
+     - Paste it at the TOP of .blog-grid (so newest post appears first)
+     - Update: href, img src/alt, category, date, h3 title, excerpt
+     - Remove the .blog-card-stub class
+
+  NOTE FOR FUTURE CMS MIGRATION (Sanity or similar):
+  Each content region below maps cleanly to a Sanity schema field:
+    POST TITLE      → title (string)
+    POST CATEGORY   → category (reference or string)
+    POST BYLINE     → author (reference) + publishedAt (date)
+    POST BODY       → body (Portable Text / block content)
+    og:image        → openGraphImage (image)
+  ============================================================
+-->
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- POST TITLE -->
+<title>Your Post Title — Sports Bridge International Foundation</title>
+<!-- POST DESCRIPTION -->
+<meta name="description" content="A one-to-two sentence summary of this post for search engines and social previews.">
+<!-- POST CANONICAL URL -->
+<link rel="canonical" href="https://sportsbridgefoundation.com/post-your-slug.html">
+<meta property="og:type" content="article">
+<!-- POST OG TITLE -->
+<meta property="og:title" content="Your Post Title">
+<!-- POST OG DESCRIPTION -->
+<meta property="og:description" content="A one-to-two sentence summary for social previews.">
+<!-- POST OG URL -->
+<meta property="og:url" content="https://sportsbridgefoundation.com/post-your-slug.html">
+<meta property="og:image" content="https://sportsbridgefoundation.com/assets/og.png">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
+<link rel="icon" type="image/png" href="assets/favicon.png">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600&family=Figtree:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/styles.css">
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="site-header">
+  <input type="checkbox" id="navToggle" class="nav-toggle-input" aria-hidden="true">
+  <div class="wrap nav-bar">
+    <!-- SWAP: logo pending -->
+    <a href="index.html" class="nav-logo"><img src="assets/logo-nav.png" alt="Sports Bridge International Foundation — home"></a>
+    <nav class="nav-links" id="siteNav" aria-label="Main">
+      <a class="link-draw" href="index.html">Home</a>
+      <a class="link-draw" href="about.html">About</a>
+      <a class="link-draw" href="programmes.html">Programmes</a>
+      <a class="link-draw" href="impact.html">Impact</a>
+      <a class="link-draw" href="blog.html" aria-current="section">Blog</a>
+      <a class="link-draw" href="gallery.html">Gallery</a>
+      <a class="link-draw" href="contact.html">Contact</a>
+    </nav>
+    <label for="navToggle" class="nav-burger"><span></span><span></span></label>
+    <a href="contact.html" class="btn btn-ink nav-cta">Get Involved</a>
+  </div>
+</header>
+
+<main id="main">
+
+  <article>
+    <header class="page-hero wrap article-wrap" style="text-align:left">
+      <!-- POST CATEGORY — e.g. "Impact Story", "Events", "Programme News", "Beyond Borders" -->
+      <p class="kicker"><a class="link-draw" href="blog.html" style="color:inherit">Blog</a> / Impact Story</p>
+      <!-- POST TITLE -->
+      <h1 class="display" style="font-size:clamp(2.25rem,5vw,4rem); margin-top:1.5rem">Your post title goes here</h1>
+      <!-- POST BYLINE — format: "By [Author] · DD Month YYYY · X min read" -->
+      <p class="news-meta" style="margin-top:1.5rem">By the Sports Bridge team &middot; DD Month YYYY &middot; X min read</p>
+      <hr class="page-hero-rule" style="margin-top:2.5rem">
+    </header>
+
+    <div class="section article-body" style="padding-top:clamp(2rem,4vw,3rem)">
+      <div class="wrap article-wrap">
+
+        <!-- ============================================================
+             POST BODY START
+             Replace everything between these markers with post content.
+             ============================================================ -->
+
+        <!-- Optional: hero image for the post -->
+        <!-- SWAP: replace with real post image -->
+        <figure class="article-figure">
+          <div class="duotone">
+            <img src="https://images.unsplash.com/photo-1471295253337-3ceaaedca402?auto=format&fit=crop&w=1100&q=72"
+                 alt="Descriptive alt text for the lead image" loading="eager">
+          </div>
+          <figcaption>Caption describing the image.</figcaption>
+        </figure>
+
+        <p>Opening paragraph. This is where the story begins. Keep the first paragraph punchy — it's what readers see before they decide to keep going.</p>
+
+        <p>Second paragraph continues the story.</p>
+
+        <h2>Section heading</h2>
+        <p>Section body. Use h2 for all section headings within the post body — there's already an h1 in the article header above.</p>
+
+        <blockquote class="lead-quote">&ldquo;Pull quote goes here. Use for a strong direct quote from a participant, partner, or team member.&rdquo;</blockquote>
+
+        <p>Continue the story...</p>
+
+        <!-- Optional: two-up image pair -->
+        <!--
+        <div class="article-figure-pair">
+          <figure>
+            <div class="duotone"><img src="SWAP.jpg" alt="Alt text" loading="lazy"></div>
+          </figure>
+          <figure>
+            <div class="duotone"><img src="SWAP.jpg" alt="Alt text" loading="lazy"></div>
+          </figure>
+        </div>
+        -->
+
+        <p>Closing paragraph. End with a forward-looking note or a reflection that reinforces the mission.</p>
+
+        <p><em>Optional closing note — e.g. "If you'd like to be part of what comes next, there's a place for you on the team."</em></p>
+
+        <!-- ============================================================
+             POST BODY END
+             ============================================================ -->
+
+        <!-- POST SHARE LINKS — replace the URL-encoded URL in each href -->
+        <div class="article-share">
+          <span class="share-label">Share this story</span>
+          <div class="share-btns">
+            <!-- SWAP URL: replace %2F%2Fsportsbridgefoundation.com%2Fpost-your-slug.html with real encoded URL -->
+            <a class="share-btn" href="https://twitter.com/intent/tweet?url=https%3A%2F%2Fsportsbridgefoundation.com%2Fpost-your-slug.html" rel="noopener" aria-label="Share on X"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231 5.45-6.231zm-1.161 17.52h1.833L7.084 4.126H5.117l11.966 15.644z"/></svg></a>
+            <a class="share-btn" href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Fsportsbridgefoundation.com%2Fpost-your-slug.html" rel="noopener" aria-label="Share on LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9.5h4V21H3zM9.5 9.5h3.8v1.6h.05c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.78 2.65 4.78 6.1V21h-4v-5.3c0-1.26-.02-2.9-1.77-2.9-1.77 0-2.04 1.38-2.04 2.8V21h-4z"/></svg></a>
+            <a class="share-btn" href="https://wa.me/?text=https%3A%2F%2Fsportsbridgefoundation.com%2Fpost-your-slug.html" rel="noopener" aria-label="Share on WhatsApp"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.52.149-.174.198-.298.297-.497.1-.198.05-.371-.025-.52-.074-.149-.668-1.612-.916-2.207-.241-.579-.486-.5-.668-.51l-.57-.01c-.197 0-.52.074-.791.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.064 2.875 1.213 3.074.149.198 2.095 3.2 5.076 4.487.71.306 1.263.489 1.694.625.712.227 1.36.195 1.872.118.57-.085 1.758-.719 2.006-1.413.247-.694.247-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413"/></svg></a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </article>
+
+  <!-- GET INVOLVED BAND — keep as-is in every post -->
+  <section class="teal-band section-tight on-teal" aria-labelledby="cta-h">
+    <svg class="penalty-arc" style="left:-130px; top:50%; transform:translateY(-50%); width:clamp(260px,26vw,400px); height:auto;" viewBox="0 0 400 400" aria-hidden="true">
+      <circle cx="200" cy="200" r="198"/>
+    </svg>
+    <div class="wrap band-grid">
+      <div class="band-copy">
+        <p class="kicker">Get involved</p>
+        <h2 class="display" id="cta-h">There&rsquo;s a place for you on the team.</h2>
+        <p>Partner with us, lend your time as a volunteer or coach, or enrol a child in a free programme &mdash; every way in starts with a conversation.</p>
+      </div>
+      <div class="band-cta">
+        <a href="contact.html" class="btn btn-paper">Get Involved</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer" style="margin-top:0">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <!-- SWAP: logo pending -->
+        <img src="assets/logo-nav.png" alt="Sports Bridge International Foundation">
+        <p>The social impact foundation building pathways from play to potential &mdash; for young people across Lagos and Africa.</p>
+      </div>
+      <nav class="foot-col" aria-label="Explore">
+        <h2>Explore</h2>
+        <a href="about.html">About Us</a>
+        <a href="programmes.html">Programmes</a>
+        <a href="impact.html">Impact</a>
+        <a href="blog.html">Blog</a>
+        <a href="gallery.html">Gallery</a>
+      </nav>
+      <nav class="foot-col" aria-label="Engage">
+        <h2>Engage</h2>
+        <a href="contact.html">Partner With Us</a>
+        <a href="contact.html">Volunteer</a>
+        <a href="contact.html">Enrol a Child</a>
+      </nav>
+      <div class="foot-col foot-news">
+        <h2>Stay in the loop</h2>
+        <!-- SWAP: connect to email tool -->
+        <form class="news-row" action="#" onsubmit="return false">
+          <input type="email" placeholder="Your email address" aria-label="Email address">
+          <button type="submit">Subscribe &rarr;</button>
+        </form>
+        <p>Ikoyi Club 1938, Awolowo Road, Ikoyi, Lagos<br>
+          <a href="mailto:info@sportsbridgeintl.com" style="color:inherit">info@sportsbridgeintl.com</a><br>
+          <a href="tel:+2349093925792" style="color:inherit">+234 909 392 5792</a>
+        </p>
+      </div>
+    </div>
+    <div class="foot-meta">
+      <a class="foot-social" href="https://www.instagram.com/shopsportsbridge_" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="2.5" y="2.5" width="19" height="19" rx="5"/><circle cx="12" cy="12" r="4.5"/><circle cx="17.8" cy="6.2" r="1.4" fill="currentColor" stroke="none"/></svg></a>
+      <a class="foot-social" href="https://www.linkedin.com/company/sports-bridge-interational" rel="noopener" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9.5h4V21H3zM9.5 9.5h3.8v1.6h.05c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.78 2.65 4.78 6.1V21h-4v-5.3c0-1.26-.02-2.9-1.77-2.9-1.77 0-2.04 1.38-2.04 2.8V21h-4z"/></svg></a>
+      <a href="https://sportsbridgeintl.com" rel="noopener">Powered by Sports Bridge International</a>
+      <a href="privacy.html">Privacy</a>
+      <a href="terms.html">Terms</a>
+    </div>
+    <div class="foot-bottom">
+      <div>&copy; 2026 Sports Bridge International Foundation. All rights reserved.</div>
+      <div>Elevate Your Performance</div>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/main.js"></script>
+</body>
+</html>
