@@ -2444,7 +2444,7 @@ p { text-wrap: pretty; }
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: clamp(2rem, 4vw, 3.5rem);
+  gap: clamp(1.5rem, 2.5vw, 3rem);
 }
 
 .logo-wall-item { display: flex; align-items: center; }
@@ -2463,6 +2463,10 @@ p { text-wrap: pretty; }
 /* MacTay logo is very light-coloured — pre-darken before grayscaling */
 .logo-wall-item--light .logo-wall-img        { filter: brightness(0.3) grayscale(1) opacity(0.65); }
 .logo-wall-item--light:hover .logo-wall-img  { filter: brightness(1) grayscale(0) opacity(1); }
+
+/* Per-logo size overrides — square/badge marks need more height to read at the same visual weight as wide wordmarks */
+.logo-wall-item--tall .logo-wall-img     { height: 68px; max-width: 200px; }
+@media (max-width: 480px) { .logo-wall-item--tall .logo-wall-img { height: 52px; } }
 
 @media (max-width: 480px) {
   .logo-wall { gap: 1.5rem 2rem; }
