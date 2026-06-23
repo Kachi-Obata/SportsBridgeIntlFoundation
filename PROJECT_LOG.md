@@ -254,3 +254,40 @@ Stub directories created with `.gitkeep` files:
 2. **Year headings** — using large ghosted Oswald numerals rather than the divider-badge circles used elsewhere; more readable at a glance for a year-segmented archive. Badge circles are used within other pages only between same-page sections.
 3. **Stub-first 2024 section** — 6 stubs appear before the real Squashtival photos, following chronological order. When the other 6 events are filled in, the full 2024 section will read correctly in sequence.
 - [x] ~~Paystack live key~~ — removed; no payments on the site
+
+# Update — 23 June 2026 (Gallery — all remaining events filled in)
+
+All 6 outstanding stub events have real photos now; gallery.html has no stubs left. Source photos were in iCloud Drive (`~/Library/Mobile Documents/com~apple~CloudDocs/Downloads/SBI Foundation/`), not the local Downloads folder used previously.
+
+## What was filled in
+
+| Event | Source photos | Curated | Notes |
+|---|---|---|---|
+| Squash 2024 | 91 | 16 | Built earlier this session as the workflow pilot |
+| Squash Final | 155 | 16 | RSA Squash Open 2024 — finals day, awards, press conference |
+| Squash Clinic — Day 1 | 85 | 16 | Kids' clinic — registration through gift handout |
+| Squashtrivia Camp — Day 4 | 109 | 16 | |
+| Squashtrivia — Day 5 | 80 | 16 | |
+| Squashtrivia — Day 6 | 98 | 16 | |
+
+All six replaced their `gallery-event-stub` blocks in `gallery.html` with real `<ul class="gallery-grid">` blocks, same template as Squashtival Final Day.
+
+## New event added (not previously scaffolded)
+
+**Zenith Bank — SBI Badminton Tournament**, added to the 2026 section after the existing Badminton event. Source had two subfolders — `Highlights` (75 photos, on-court action + team photos) and `Dinner-Award` (126 photos, gala dinner, ribbon-cutting, awards ceremony) — 186 unique after dedup. Curated 16: 10 from Highlights, 6 from Dinner-Award, to represent both the tournament and the evening gala.
+
+## Method (same pipeline as 18 June, refined)
+
+1. dHash (8×8, Hamming ≤8) dedup per event folder to drop near-duplicate bursts.
+2. Labeled contact sheets (5-col, 20-per-sheet) generated for visual curation — captions switched to plain index numbers (`#N`) after an early misread of small filename text led to picking nonexistent files; an authoritative index→filename text file is now generated alongside each contact sheet to look up the real filename once an index is chosen.
+3. Curated photos resized to `full/` (1600px longest edge, Q82) and `thumb/` (600px, Q78), JPEG re-encoded (EXIF stripped implicitly).
+4. Stub block replaced with a real `gallery-event` block; `gallery-album-count` shows "Showing 16 of N" against the true unique-photo count for that event.
+
+## Updated section comments
+
+- 2024 section-summary comment: "seven events (five stubs + two real)" → "seven events (all real)".
+- 2026 section-summary comment: "Badminton (16 photos)" → "two events (Badminton, Zenith Bank — SBI Badminton Tournament)".
+
+## Outstanding
+
+- All `gallery-album-link` hrefs are still `gallery.html` with `data-drive-url="PLACEHOLDER_..."` — Google Drive folder URLs for every event (old and new) still need to be supplied before launch, including the new Zenith Bank event.
