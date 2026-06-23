@@ -1836,6 +1836,7 @@ p { text-wrap: pretty; }
 /* 40.1 Mission — full-width cinematic band (HOME-02).
    Desktop: band on top, title below on paper. Mobile: tall image with
    the eyebrow + heading overlaid (mirrors the Beyond Borders hero). */
+.mission-hero { margin-bottom: var(--space-head); }
 .mission-band { aspect-ratio: 16 / 6; border: var(--line-soft); }
 .mission-band img { width: 100%; height: 100%; object-fit: cover; }
 .mission-copy { max-width: 68ch; }
