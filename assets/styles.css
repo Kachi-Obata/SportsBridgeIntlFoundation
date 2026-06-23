@@ -235,6 +235,12 @@ p { text-wrap: pretty; }
   padding-block: 1.5rem;
 }
 .table-rows > .table-row:last-child { border-bottom: var(--line-soft); }
+.table-row--simple { grid-template-columns: minmax(11rem, 16rem) 1fr; }
+.table-row--simple h3 { margin: 0; }
+@media (max-width: 480px) { .table-row--simple { grid-template-columns: 1fr; gap: 0.4rem; } }
+
+.tiers-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--gutter); }
+@media (max-width: 480px) { .tiers-grid { grid-template-columns: 1fr; } }
 
 /* ------------------------------------------------------------
    6. BUTTONS — square, decisive, invert on hover
@@ -670,6 +676,9 @@ p { text-wrap: pretty; }
   grid-template-columns: repeat(3, 1fr);
   gap: var(--gutter);
 }
+.figures.figures--4up { grid-template-columns: repeat(4, 1fr); }
+@media (max-width: 900px) { .figures.figures--4up { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 480px) { .figures.figures--4up { grid-template-columns: 1fr; gap: 0; } }
 .figure { border-top: var(--line); padding-top: 1.5rem; }
 .figure .stat-n { font-size: clamp(3.5rem, 8vw, 7rem); }
 
@@ -1651,8 +1660,9 @@ p { text-wrap: pretty; }
 .stat-strip { border-bottom: var(--line); }
 .stat-strip-inner {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(4, 1fr);
 }
+@media (max-width: 900px) { .stat-strip-inner { grid-template-columns: repeat(2, 1fr); } }
 .stat-strip .stat { padding: clamp(1.5rem, 3vw, 2.25rem) clamp(1rem, 3vw, 2.5rem); }
 .stat-strip .stat + .stat { position: relative; }
 .stat-strip .stat + .stat::before {
@@ -1846,6 +1856,16 @@ p { text-wrap: pretty; }
   .mission-hero__title h2 { color: var(--paper); font-size: clamp(1.9rem, 7.5vw, 2.6rem); max-width: none; }
 }
 
+/* 40.0 Who We Are — six-item ruled checklist (mirrors .involve-col li) */
+.mission-list { list-style: none; margin: 0.75rem 0 0; padding: 0; }
+.mission-list li {
+  color: var(--ink-soft);
+  font-size: 1.0625rem;
+  padding-block: 0.65rem;
+  border-top: var(--line-soft);
+}
+.mission-list li:last-child { border-bottom: var(--line-soft); }
+
 /* 40.2 Programme rows — inline image reveal inside the title */
 .prog-img-slot {
   display: inline-block;
@@ -1860,7 +1880,39 @@ p { text-wrap: pretty; }
 .prog-img-slot img { width: 56px; height: 100%; object-fit: cover; display: block; }
 @media (max-width: 480px) { .prog-img-slot { display: none !important; } }
 
-/* 40.3 Impact featured story — full-bleed photo as faint background texture */
+/* 40.3 Impact featured story — narrow portrait strip (photo pinned left, quote fills the rest) */
+.featured-story__inner {
+  display: flex;
+  align-items: stretch;
+  width: 100%;
+  min-height: 360px;
+}
+.featured-story__photo {
+  width: 22%;
+  flex-shrink: 0;
+  overflow: hidden;
+}
+.featured-story__photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.featured-story__content {
+  flex: 1;
+  padding: 48px 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+@media (max-width: 480px) {
+  .featured-story__inner { flex-direction: column; min-height: 0; }
+  .featured-story__photo { width: 100%; height: 110px; }
+  .featured-story__photo img { height: 110px; }
+  .featured-story__content { padding: 28px 20px; }
+}
+
+/* legacy "photo as faint background texture" rules — unused by .featured-story, harmless */
 .story-band {
   position: relative;
   overflow: hidden;
@@ -2402,7 +2454,7 @@ p { text-wrap: pretty; }
 .endorsement-item {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: center;
   gap: 1rem;
   padding: clamp(1.5rem, 3vw, 2rem);
   border: var(--line);
@@ -2420,6 +2472,8 @@ p { text-wrap: pretty; }
   transition: filter var(--t-slow) ease;
 }
 .endorsement-item:hover .endorsement-logo { filter: grayscale(0); }
+.endorsement-logo--lg { max-height: 144px; max-width: 320px; }
+.endorsement-logo--md { max-height: 104px; max-width: 280px; }
 
 .endorsement-name {
   font-family: var(--font-mono);
@@ -2427,6 +2481,8 @@ p { text-wrap: pretty; }
   text-transform: uppercase;
   letter-spacing: 0.08em;
   color: var(--ink-soft);
+  text-align: center;
+  margin-top: auto;
   transition: color var(--t-fast) ease;
 }
 .endorsement-item:hover .endorsement-name { color: var(--teal-deep); }
