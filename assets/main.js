@@ -103,6 +103,29 @@
     reveals.forEach(function (el) { revealObserver.observe(el); });
   }
 
+  /* ---- Carousel slide loader (stacked crossfade slides can't rely on
+     native loading="lazy" — every slide shares the same on-screen rect,
+     so the browser only ever fetches whichever one happens to be cached).
+     Loads every slide's data-src once its carousel enters the viewport. ---- */
+  var carousels = document.querySelectorAll(".photo-carousel, .bb-carousel");
+  if ("IntersectionObserver" in window && carousels.length) {
+    var carouselObserver = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.querySelectorAll("img[data-src]").forEach(function (img) {
+            img.src = img.dataset.src;
+          });
+          carouselObserver.unobserve(entry.target);
+        }
+      });
+    }, { rootMargin: "200px 0px" });
+    carousels.forEach(function (el) { carouselObserver.observe(el); });
+  } else {
+    document.querySelectorAll(".photo-carousel img[data-src], .bb-carousel img[data-src]").forEach(function (img) {
+      img.src = img.dataset.src;
+    });
+  }
+
   /* ---- Gallery lightbox ---- */
   var lbDialog  = document.getElementById("galleryLightbox");
   if (lbDialog && lbDialog.showModal) {

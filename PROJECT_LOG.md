@@ -291,3 +291,43 @@ All six replaced their `gallery-event-stub` blocks in `gallery.html` with real `
 ## Outstanding
 
 - All `gallery-album-link` hrefs are still `gallery.html` with `data-drive-url="PLACEHOLDER_..."` — Google Drive folder URLs for every event (old and new) still need to be supplied before launch, including the new Zenith Bank event.
+
+*(Since resolved — see "Gallery: real Drive links" below.)*
+
+# Update — 28 June 2026 (rotating photo carousels)
+
+Started converting single-photo feature slots into auto-rotating carousels, one section at a time per owner direction (no speculative placeholder swaps — each slot gets real photos before it's touched).
+
+## Gallery: real Drive links
+
+All ten gallery-event "View the full album" links now point at the real Google Drive folders the owner supplied, replacing every `PLACEHOLDER_*`/`data-drive-url` stub. The `data-drive-url` attribute is gone — these are now plain `href` links with `rel="noopener"`, matching the site's existing external-link convention (no `target="_blank"` anywhere else either).
+
+## Who We Are spacing fix
+
+`.mission-hero` (index.html) had no `margin-bottom`, so the body paragraph sat flush against the image/heading block above it. Added `margin-bottom: var(--space-head)` — the same token already used for spacing under section heads elsewhere.
+
+## New component: generic photo carousel
+
+`assets/styles.css` §45 adds `.photo-carousel`/`.photo-slide`, a pure-CSS crossfade carousel generalizing the existing Beyond Borders `.bb-slide`/`bb-cross` pattern (§43) to any slide count from 3–8 via `[data-count]`. Each count gets its own `@keyframes photo-cross-N` tuned so every slide gets an equal ~5.1s "on" window with a 0.9s crossfade, same timing math as the original 6-slide version. Drops into any existing `.duotone`/`.duotone-paper` figure — those rules already size/cover/tint each `<img>`; the new rules just add `position:absolute` stacking and the animation. `prefers-reduced-motion` shows slide 1 only, no animation, matching §43's existing fallback.
+
+## Bug found and fixed: carousel slides never loaded past the first
+
+While building this, found that the **live, already-shipped** Beyond Borders carousel (index.html, sport-without-borders.html) was silently broken — all 6 slides used `loading="lazy"`, but since every slide shares the exact same on-screen rect (stacked, only one ever opaque), the browser only ever fetched whichever slide happened to already be cached from elsewhere on the page. The other 5 never loaded; the band was effectively a single static image the whole time.
+
+Fixed by adding an IntersectionObserver-driven loader to `assets/main.js` (same pattern as the existing `.reveal` scroll-animation observer): carousel slide images now carry `data-src` instead of `src`, and `main.js` swaps `data-src` → `src` once the carousel's container enters the viewport (200px early margin). Applied to both `.photo-carousel` (new) and `.bb-carousel` (existing) — `sport-without-borders.html`'s slide 1 keeps a real eager `src` since that carousel is the page's own hero.
+
+## Women & Girls In Sport — first real carousel
+
+Built from 8 owner-supplied photos (`~/Downloads/Women and girls in sports/`) — two were named `First.jpg`/`Fourth.jpg` specifying fixed carousel positions 1 and 4, rest ordered arbitrarily. Optimized to `assets/girls-in-sport/01.jpg`–`08.jpg` (1600px longest edge, Q82, EXIF stripped via re-encode). Replaces the old single `assets/girls-on-the-ball.jpeg` in both its slots:
+- `programmes.html` `#women-and-girls` `.prog-figure` — full 8-image carousel (this row already carried a `<!-- SWAP: real programme photo -->` marker, now resolved).
+- `index.html` homepage programme-row inline thumbnail — too small (56px tall) for rotation to read; swapped to a single still (`01.jpg`) instead of animating it.
+
+Old `assets/girls-on-the-ball.jpeg` deleted after confirming no remaining references anywhere in the repo.
+
+## Verification note
+
+The live preview tool's browser session became unreliable partway through this work — `window.innerHeight` reporting 0, scroll position not responding to `scrollTo`, and the CSS animation clock appearing frozen (computed `opacity` never advanced past its initial keyframe value across 10+ seconds of polling, even on the **pre-existing** `.bb-slide` carousel and the **pre-existing** `.reveal` scroll-fade mechanism — both already live in production, so this isn't something introduced here). Correctness was instead verified directly: fetched `assets/girls-in-sport/01.jpg` from the dev server and confirmed it returned the exact same byte count as the file on disk (314,353 bytes); confirmed all 8 images decode successfully (`naturalWidth` correct for each); confirmed computed CSS (`width`/`height`/`object-fit`/`filter`/`position`) on the slide exactly matches its `.duotone` parent figure; confirmed zero console errors throughout. A real-browser eyeball check is still worth doing, since live crossfade timing specifically couldn't be confirmed through the broken tool session.
+
+## Outstanding
+
+- Five more programme/feature image slots identified as carousel candidates, to be done one at a time as the owner supplies photos for each: Youth Sports Development, Community Sports Hubs, the Beyond Borders article figure(s), and others as directed. Education & Mentorship and Sports Entrepreneurship have no real photos available yet — staying single Unsplash placeholders until real photography exists, per the placeholder policy.
