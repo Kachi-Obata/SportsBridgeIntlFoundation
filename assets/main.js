@@ -76,7 +76,7 @@
     requestAnimationFrame(frame);
   }
 
-  var counters = document.querySelectorAll("[data-count]");
+  var counters = document.querySelectorAll("[data-count]:not(.photo-carousel)");
   if (!reducedMotion && "IntersectionObserver" in window && counters.length) {
     var countObserver = new IntersectionObserver(function (entries) {
       entries.forEach(function (entry) {

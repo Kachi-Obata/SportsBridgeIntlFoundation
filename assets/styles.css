@@ -1980,19 +1980,22 @@ p { text-wrap: pretty; }
    No JS, no scroll-snap. Slides inherit the .bb-hero img treatment
    (absolute, cover, grayscale) so the band stays full-bleed and
    identical in dimensions to the single-image hero it replaces.
+   2s full-opacity dwell per slide + 0.5s crossfade into the next
+   (2.5s slot x 6 slides = 15s full cycle) — same slot timing as
+   section 45's .photo-carousel, kept in sync deliberately.
    ------------------------------------------------------------ */
-.bb-slide { opacity: 0; animation: bb-cross 36s linear infinite; }
-.bb-slide-2 { animation-delay: 6s; }
-.bb-slide-3 { animation-delay: 12s; }
-.bb-slide-4 { animation-delay: 18s; }
-.bb-slide-5 { animation-delay: 24s; }
-.bb-slide-6 { animation-delay: 30s; }
+.bb-slide { opacity: 0; animation: bb-cross 15s linear infinite; }
+.bb-slide-2 { animation-delay: 2.5s; }
+.bb-slide-3 { animation-delay: 5s; }
+.bb-slide-4 { animation-delay: 7.5s; }
+.bb-slide-5 { animation-delay: 10s; }
+.bb-slide-6 { animation-delay: 12.5s; }
 @keyframes bb-cross {
-  0%    { opacity: 0; }
-  2.5%  { opacity: 1; }
-  16.6% { opacity: 1; }
-  19.1% { opacity: 0; }
-  100%  { opacity: 0; }
+  0%      { opacity: 0; }
+  3.333%  { opacity: 1; }
+  16.667% { opacity: 1; }
+  20%     { opacity: 0; }
+  100%    { opacity: 0; }
 }
 @media (prefers-reduced-motion: reduce) {
   .bb-slide { animation: none; opacity: 0; }
@@ -2544,56 +2547,60 @@ p { text-wrap: pretty; }
    scroll-snap. Drop into any existing .duotone/.duotone-paper
    figure — those rules already size/cover/tint each <img>; this
    just adds position:absolute + the crossfade timing on top.
+   Slot is fixed at 2.5s regardless of slide count (2s full-opacity
+   dwell + 0.5s crossfade into the next slide), so total cycle
+   length scales with count (2.5s x N) but per-slide pacing never
+   changes — 8 slides never feels faster than 3.
    ------------------------------------------------------------ */
 .photo-carousel .photo-slide {
   position: absolute; inset: 0;
   opacity: 0;
 }
-.photo-carousel[data-count="3"] .photo-slide { animation: photo-cross-3 18s linear infinite; }
-.photo-carousel[data-count="3"] .photo-slide:nth-child(2) { animation-delay: 6s; }
-.photo-carousel[data-count="3"] .photo-slide:nth-child(3) { animation-delay: 12s; }
+.photo-carousel[data-count="3"] .photo-slide { animation: photo-cross-3 7.5s linear infinite; }
+.photo-carousel[data-count="3"] .photo-slide:nth-child(2) { animation-delay: 2.5s; }
+.photo-carousel[data-count="3"] .photo-slide:nth-child(3) { animation-delay: 5s; }
 
-.photo-carousel[data-count="4"] .photo-slide { animation: photo-cross-4 24s linear infinite; }
-.photo-carousel[data-count="4"] .photo-slide:nth-child(2) { animation-delay: 6s; }
-.photo-carousel[data-count="4"] .photo-slide:nth-child(3) { animation-delay: 12s; }
-.photo-carousel[data-count="4"] .photo-slide:nth-child(4) { animation-delay: 18s; }
+.photo-carousel[data-count="4"] .photo-slide { animation: photo-cross-4 10s linear infinite; }
+.photo-carousel[data-count="4"] .photo-slide:nth-child(2) { animation-delay: 2.5s; }
+.photo-carousel[data-count="4"] .photo-slide:nth-child(3) { animation-delay: 5s; }
+.photo-carousel[data-count="4"] .photo-slide:nth-child(4) { animation-delay: 7.5s; }
 
-.photo-carousel[data-count="5"] .photo-slide { animation: photo-cross-5 30s linear infinite; }
-.photo-carousel[data-count="5"] .photo-slide:nth-child(2) { animation-delay: 6s; }
-.photo-carousel[data-count="5"] .photo-slide:nth-child(3) { animation-delay: 12s; }
-.photo-carousel[data-count="5"] .photo-slide:nth-child(4) { animation-delay: 18s; }
-.photo-carousel[data-count="5"] .photo-slide:nth-child(5) { animation-delay: 24s; }
+.photo-carousel[data-count="5"] .photo-slide { animation: photo-cross-5 12.5s linear infinite; }
+.photo-carousel[data-count="5"] .photo-slide:nth-child(2) { animation-delay: 2.5s; }
+.photo-carousel[data-count="5"] .photo-slide:nth-child(3) { animation-delay: 5s; }
+.photo-carousel[data-count="5"] .photo-slide:nth-child(4) { animation-delay: 7.5s; }
+.photo-carousel[data-count="5"] .photo-slide:nth-child(5) { animation-delay: 10s; }
 
-.photo-carousel[data-count="6"] .photo-slide { animation: photo-cross-6 36s linear infinite; }
-.photo-carousel[data-count="6"] .photo-slide:nth-child(2) { animation-delay: 6s; }
-.photo-carousel[data-count="6"] .photo-slide:nth-child(3) { animation-delay: 12s; }
-.photo-carousel[data-count="6"] .photo-slide:nth-child(4) { animation-delay: 18s; }
-.photo-carousel[data-count="6"] .photo-slide:nth-child(5) { animation-delay: 24s; }
-.photo-carousel[data-count="6"] .photo-slide:nth-child(6) { animation-delay: 30s; }
+.photo-carousel[data-count="6"] .photo-slide { animation: photo-cross-6 15s linear infinite; }
+.photo-carousel[data-count="6"] .photo-slide:nth-child(2) { animation-delay: 2.5s; }
+.photo-carousel[data-count="6"] .photo-slide:nth-child(3) { animation-delay: 5s; }
+.photo-carousel[data-count="6"] .photo-slide:nth-child(4) { animation-delay: 7.5s; }
+.photo-carousel[data-count="6"] .photo-slide:nth-child(5) { animation-delay: 10s; }
+.photo-carousel[data-count="6"] .photo-slide:nth-child(6) { animation-delay: 12.5s; }
 
-.photo-carousel[data-count="7"] .photo-slide { animation: photo-cross-7 42s linear infinite; }
-.photo-carousel[data-count="7"] .photo-slide:nth-child(2) { animation-delay: 6s; }
-.photo-carousel[data-count="7"] .photo-slide:nth-child(3) { animation-delay: 12s; }
-.photo-carousel[data-count="7"] .photo-slide:nth-child(4) { animation-delay: 18s; }
-.photo-carousel[data-count="7"] .photo-slide:nth-child(5) { animation-delay: 24s; }
-.photo-carousel[data-count="7"] .photo-slide:nth-child(6) { animation-delay: 30s; }
-.photo-carousel[data-count="7"] .photo-slide:nth-child(7) { animation-delay: 36s; }
+.photo-carousel[data-count="7"] .photo-slide { animation: photo-cross-7 17.5s linear infinite; }
+.photo-carousel[data-count="7"] .photo-slide:nth-child(2) { animation-delay: 2.5s; }
+.photo-carousel[data-count="7"] .photo-slide:nth-child(3) { animation-delay: 5s; }
+.photo-carousel[data-count="7"] .photo-slide:nth-child(4) { animation-delay: 7.5s; }
+.photo-carousel[data-count="7"] .photo-slide:nth-child(5) { animation-delay: 10s; }
+.photo-carousel[data-count="7"] .photo-slide:nth-child(6) { animation-delay: 12.5s; }
+.photo-carousel[data-count="7"] .photo-slide:nth-child(7) { animation-delay: 15s; }
 
-.photo-carousel[data-count="8"] .photo-slide { animation: photo-cross-8 48s linear infinite; }
-.photo-carousel[data-count="8"] .photo-slide:nth-child(2) { animation-delay: 6s; }
-.photo-carousel[data-count="8"] .photo-slide:nth-child(3) { animation-delay: 12s; }
-.photo-carousel[data-count="8"] .photo-slide:nth-child(4) { animation-delay: 18s; }
-.photo-carousel[data-count="8"] .photo-slide:nth-child(5) { animation-delay: 24s; }
-.photo-carousel[data-count="8"] .photo-slide:nth-child(6) { animation-delay: 30s; }
-.photo-carousel[data-count="8"] .photo-slide:nth-child(7) { animation-delay: 36s; }
-.photo-carousel[data-count="8"] .photo-slide:nth-child(8) { animation-delay: 42s; }
+.photo-carousel[data-count="8"] .photo-slide { animation: photo-cross-8 20s linear infinite; }
+.photo-carousel[data-count="8"] .photo-slide:nth-child(2) { animation-delay: 2.5s; }
+.photo-carousel[data-count="8"] .photo-slide:nth-child(3) { animation-delay: 5s; }
+.photo-carousel[data-count="8"] .photo-slide:nth-child(4) { animation-delay: 7.5s; }
+.photo-carousel[data-count="8"] .photo-slide:nth-child(5) { animation-delay: 10s; }
+.photo-carousel[data-count="8"] .photo-slide:nth-child(6) { animation-delay: 12.5s; }
+.photo-carousel[data-count="8"] .photo-slide:nth-child(7) { animation-delay: 15s; }
+.photo-carousel[data-count="8"] .photo-slide:nth-child(8) { animation-delay: 17.5s; }
 
-@keyframes photo-cross-3 { 0% {opacity:0;} 5%   {opacity:1;} 33.3%{opacity:1;} 38.3%{opacity:0;} 100%{opacity:0;} }
-@keyframes photo-cross-4 { 0% {opacity:0;} 3.75%{opacity:1;} 25%  {opacity:1;} 28.75%{opacity:0;} 100%{opacity:0;} }
-@keyframes photo-cross-5 { 0% {opacity:0;} 3%   {opacity:1;} 20%  {opacity:1;} 23%  {opacity:0;} 100%{opacity:0;} }
-@keyframes photo-cross-6 { 0% {opacity:0;} 2.5% {opacity:1;} 16.6%{opacity:1;} 19.1%{opacity:0;} 100%{opacity:0;} }
-@keyframes photo-cross-7 { 0% {opacity:0;} 2.14%{opacity:1;} 14.29%{opacity:1;} 16.43%{opacity:0;} 100%{opacity:0;} }
-@keyframes photo-cross-8 { 0% {opacity:0;} 1.88%{opacity:1;} 12.5%{opacity:1;} 14.38%{opacity:0;} 100%{opacity:0;} }
+@keyframes photo-cross-3 { 0% {opacity:0;} 6.667%  {opacity:1;} 33.333%{opacity:1;} 40%     {opacity:0;} 100%{opacity:0;} }
+@keyframes photo-cross-4 { 0% {opacity:0;} 5%      {opacity:1;} 25%    {opacity:1;} 30%     {opacity:0;} 100%{opacity:0;} }
+@keyframes photo-cross-5 { 0% {opacity:0;} 4%      {opacity:1;} 20%    {opacity:1;} 24%     {opacity:0;} 100%{opacity:0;} }
+@keyframes photo-cross-6 { 0% {opacity:0;} 3.333%  {opacity:1;} 16.667%{opacity:1;} 20%     {opacity:0;} 100%{opacity:0;} }
+@keyframes photo-cross-7 { 0% {opacity:0;} 2.857%  {opacity:1;} 14.286%{opacity:1;} 17.143% {opacity:0;} 100%{opacity:0;} }
+@keyframes photo-cross-8 { 0% {opacity:0;} 2.5%    {opacity:1;} 12.5%  {opacity:1;} 15%     {opacity:0;} 100%{opacity:0;} }
 
 @media (prefers-reduced-motion: reduce) {
   .photo-carousel .photo-slide { animation: none !important; opacity: 0; }
