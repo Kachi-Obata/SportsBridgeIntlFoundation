@@ -331,3 +331,19 @@ The live preview tool's browser session became unreliable partway through this w
 ## Outstanding
 
 - Five more programme/feature image slots identified as carousel candidates, to be done one at a time as the owner supplies photos for each: Youth Sports Development, Community Sports Hubs, the Beyond Borders article figure(s), and others as directed. Education & Mentorship and Sports Entrepreneurship have no real photos available yet — staying single Unsplash placeholders until real photography exists, per the placeholder policy.
+
+## Follow-up: carousel images going blank on live site, traced to the data-src/observer mechanism
+
+Kachi reported images not showing up live. Root cause: the `data-src` + IntersectionObserver loader added above (for both `.bb-carousel` and `.photo-carousel`) makes every one of those 19 slide images depend entirely on `assets/main.js` running and firing correctly to ever get a `src`. The markup and JS were each individually correct on inspection — but the dependency itself is the problem: `assets/main.js` is referenced with no cache-busting (`<script src="assets/main.js">`, same on all 4 pages that include it), so a stale cached copy served on top of fresh HTML would leave every `data-src` image permanently blank, with nothing to fall back on. That matches the reported symptom exactly.
+
+Fix: dropped the loader and the `data-src` indirection entirely. All 19 slides (6 in index.html, 6 in sport-without-borders.html, 8 in programmes.html — counting sport-without-borders.html's slide 1, which was already eager) are back to plain eager `src`, no `loading` attribute. This doesn't reintroduce the original "only one slide loads" bug, because that bug was specifically about `loading="lazy"`'s same-rect heuristic — plain eager `src` has no such heuristic, every `<img>` fetches independently regardless of CSS stacking. Removed the now-dead carousel-loader block from `assets/main.js` (was lines 106–127).
+
+Net effect: the carousels no longer depend on JS at all to display correctly — they degrade to a static first-frame image with JS disabled (the CSS crossfade animation simply doesn't run), rather than degrading to nothing.
+
+Verified locally via the preview tool's browser session: all 19 slide images plus the homepage programme-row thumbnails and all 154 gallery photos report `complete: true` with correct `naturalWidth`, zero failed network requests, zero console errors. Couldn't verify against the live sportsbridgefoundation.com domain directly — outbound network access wasn't available in this session — so this is local/source verification only; worth a real spot-check on the live site after deploy.
+
+## Image size optimization pass
+
+Audited file sizes across `assets/gallery/`, the two carousels, `assets/partners/`, `assets/communities/`, and the single-image programme/feature slots. Gallery photos were already at the established standard (1600px full / 600px thumb, Q82/Q78) from the curation pipeline, so re-encoding them only saved ~0.2%. The carousel and feature images (Beyond Borders, Women & Girls In Sport, who-we-are, sbi-store-ikoyi, grassroot-academies, estate-tournament, hero-poster) hadn't been through the same pass and saved more — about 16% on the carousels, 27% on the rest. Partner/community logo PNGs got a small lossless re-save (no resize, no quality change). Logo files untouched, per the standing rule. Same filenames and paths throughout — nothing in the HTML needed to change for this pass.
+
+Total: ~46MB → ~44.9MB across 350 files touched (~1.1MB / 2.4% saved sitewide). Modest, because most of the weight was already optimized — confirms the existing pipeline standard is doing its job.
