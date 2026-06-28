@@ -357,3 +357,15 @@ The real bug: `.photo-carousel` uses `data-count="8"` purely as a CSS hook for p
 While in there, also retimed both crossfade carousels (`.bb-carousel` §43 and `.photo-carousel` §45) to a fixed 2.5s slot — 2s full-opacity dwell + 0.5s crossfade into the next slide — replacing the old fixed 6s slot. Slot length is constant regardless of slide count for both, so total cycle scales with count (2.5s × N: 15s for Beyond Borders' 6, 20s for Women & Girls' 8) but no slide ever gets shortchanged as more are added.
 
 Verified via the Web Animations API in the preview browser (`element.getAnimations()[0]`, seeking `currentTime` directly) rather than wall-clock waiting — confirmed each slide's computed opacity hits 0→1 over exactly 500ms, holds at 1 for exactly 2000ms, then 1→0 over exactly 500ms, with the next slide's fade-in starting the instant the previous one starts fading out. Also confirmed the selector fix: on programmes.html the only `[data-count]` element is the carousel container itself, and the corrected selector now matches zero elements there, while still matching all 7 real stat numerals on index.html/impact.html.
+
+## Youth Sports Development carousel + Sport Without Borders reuse
+
+Built from 7 owner-supplied photos (`~/Downloads/Youth Sports Development/`), no fixed-position filenames this time so ordered as a narrative arc myself: team photo &rarr; registration &rarr; group warm-up &rarr; coaching &rarr; match action &rarr; bench candid &rarr; trophy presentation. Optimized to `assets/youth-sports/01.jpg`&ndash;`07.jpg` (1600px longest edge where the source was larger, Q82, EXIF stripped via re-encode &mdash; same pipeline as Women & Girls). Replaces `assets/grassroot-academies.jpg` in both its slots:
+- `programmes.html` `#youth-sports-development` `.prog-figure` &mdash; full 7-image carousel (resolves the `<!-- SWAP: real programme photo -->` marker that was on this row).
+- `index.html` homepage programme-row inline thumbnail &mdash; single still (`01.jpg`), same reasoning as Women & Girls: too small for the crossfade to read.
+
+`assets/grassroot-academies.jpg` deleted after confirming no remaining references.
+
+Also gave the programmes.html Sport Without Borders row a carousel, reusing the six existing `assets/sports-without-borders{1-6}.jpg` files already live on the homepage band and `sport-without-borders.html` &mdash; no new photos needed, just the same `.photo-carousel[data-count="6"]` treatment and alt text already established for those images. The row's single static image is gone; nothing else using those files changed.
+
+Verified all three programmes.html carousels (7/8/6 images) load with `complete:true` in the preview browser, zero failed requests, and the stat-counter selector still matches zero elements on this page (confirming the data-count collision fix from the previous entry holds for the new carousel too).
