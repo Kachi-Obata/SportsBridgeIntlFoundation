@@ -373,3 +373,15 @@ Verified all three programmes.html carousels (7/8/6 images) load with `complete:
 ## Follow-up: original Youth Sports Development photo added back in
 
 Kachi asked for the original `grassroot-academies.jpg` (the Ikoyi Club 1938 Squashtival summer-camp group photo, kids with backpacks and prizes) back in the carousel rather than left out entirely. Restored it from git history (it was already optimized — 1100&times;731, 156KB, no re-encode needed), added as `assets/youth-sports/08.jpg`, slotted in as the closing slide after the trophy presentation. `data-count` on that row bumped from 7 to 8 to match.
+
+## Blog page → "Stories coming soon" holding page
+
+Kachi wants the Blog page swapped for an on-brand "coming soon" placeholder, but explicitly asked not to delete the existing listing content — just take it off the live page for now. Used the same `.center-page`/`.center-circle` pattern already built for `404.html` (a static draw-in circle, kicker, h1, lede, two CTAs) rather than inventing a new component.
+
+The tricky part was "comment it out without deleting it": the existing blog markup is full of its own `<!-- SWAP -->` and stub comments, so wrapping the whole block in one more `<!-- -->` doesn't work — the outer comment would terminate at the first inner `-->` it hit, and everything after would render live again. Used `<template id="blog-original-content">` instead — natively inert (browsers parse but never render or fetch its contents), and since it's just an element wrapper rather than a comment, nested comments inside it parse completely normally. The entire original page-hero + featured-post + post-grid markup is preserved byte-for-byte inside it. To bring it back: delete the new center-page section and unwrap the `<template>` tag.
+
+Left the Get Involved teal band live at the bottom (outside the template) since it's the same sitewide CTA every other page keeps, not blog-specific content.
+
+Noted but out of scope for this change: `article-beyond-borders.html` (the one real, non-placeholder article) now has no live on-site link to it anywhere except inside the now-inert template — it's still in `sitemap.xml` so search engines can find it, but there's no in-site path to it until either the blog listing comes back or it gets linked from somewhere else directly.
+
+Verified in the preview browser: `document.getElementById('blog-original-content').content` still contains all 4 original `<article>` elements (1 featured + 3 stubs), `.blog-featured` is absent from the live DOM, the Get Involved band is still present, and the page renders correctly at desktop width with zero console errors and zero failed requests.
