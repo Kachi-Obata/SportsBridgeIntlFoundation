@@ -369,3 +369,7 @@ Built from 7 owner-supplied photos (`~/Downloads/Youth Sports Development/`), no
 Also gave the programmes.html Sport Without Borders row a carousel, reusing the six existing `assets/sports-without-borders{1-6}.jpg` files already live on the homepage band and `sport-without-borders.html` &mdash; no new photos needed, just the same `.photo-carousel[data-count="6"]` treatment and alt text already established for those images. The row's single static image is gone; nothing else using those files changed.
 
 Verified all three programmes.html carousels (7/8/6 images) load with `complete:true` in the preview browser, zero failed requests, and the stat-counter selector still matches zero elements on this page (confirming the data-count collision fix from the previous entry holds for the new carousel too).
+
+## Follow-up: original Youth Sports Development photo added back in
+
+Kachi asked for the original `grassroot-academies.jpg` (the Ikoyi Club 1938 Squashtival summer-camp group photo, kids with backpacks and prizes) back in the carousel rather than left out entirely. Restored it from git history (it was already optimized — 1100&times;731, 156KB, no re-encode needed), added as `assets/youth-sports/08.jpg`, slotted in as the closing slide after the trophy presentation. `data-count` on that row bumped from 7 to 8 to match.
