@@ -1162,6 +1162,19 @@ p { text-wrap: pretty; }
 }
 .member .bio { color: var(--ink-soft); font-size: 1rem; margin-top: 0.6rem; }
 
+.member-featured {
+  display: grid;
+  grid-template-columns: clamp(180px, 22%, 260px) 1fr;
+  gap: clamp(2rem, 5vw, 4rem);
+  align-items: start;
+  max-width: 52rem;
+}
+.member-featured__photo { aspect-ratio: 1; border: var(--line-soft); }
+@media (max-width: 600px) {
+  .member-featured { grid-template-columns: 1fr; }
+  .member-featured__photo { max-width: 220px; }
+}
+
 /* Story figure (about) */
 .story-figure { border: var(--line-soft); position: relative; }
 .story-figure .duotone { aspect-ratio: 16 / 9; }
