@@ -47,6 +47,18 @@
     });
   }
 
+  /* ---- Bio read-more toggle ---- */
+  var bioToggle = document.querySelector(".bio-toggle");
+  var bioMore   = document.querySelector(".bio-more");
+  if (bioToggle && bioMore) {
+    bioToggle.addEventListener("click", function () {
+      var open = bioMore.classList.toggle("is-open");
+      bioMore.setAttribute("aria-hidden", String(!open));
+      bioToggle.setAttribute("aria-expanded", String(open));
+      bioToggle.textContent = open ? "Read less" : "Read more";
+    });
+  }
+
   /* ---- Line-draw on scroll (dividers, bridge, arcs) ---- */
   var drawables = document.querySelectorAll("[data-draw]");
   if ("IntersectionObserver" in window && drawables.length) {
