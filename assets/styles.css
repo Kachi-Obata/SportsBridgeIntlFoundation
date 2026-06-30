@@ -1667,7 +1667,7 @@ p { text-wrap: pretty; }
   background: linear-gradient(180deg, rgba(16,23,20,0.42), rgba(16,23,20,0.58));
 }
 .hero-video .hero-inner { position: relative; z-index: var(--z-base); width: 100%; }
-.hero-video .touchline { z-index: var(--z-base); }
+.hero-video .touchline { z-index: var(--z-base); top: calc(72px + clamp(0.75rem, 2vw, 1.5rem)); }
 .hero-video .touchline-rect rect { stroke: var(--paper); }
 .hero-video .corner { border-color: var(--paper) !important; }
 .hero-video .hero-kicker,
@@ -1810,6 +1810,7 @@ p { text-wrap: pretty; }
   .nav-cta { padding: 0.55em 1em; font-size: 0.72rem; }
   .site-header .nav-bar { min-height: 64px; }
   .page-hero { padding-block-start: calc(64px + clamp(3.5rem, 7vw, 6rem)); }
+  .hero-video .touchline { top: calc(64px + clamp(0.75rem, 2vw, 1.5rem)); }
 }
 
 /* ------------------------------------------------------------
