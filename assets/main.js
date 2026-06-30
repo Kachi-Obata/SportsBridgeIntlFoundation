@@ -8,6 +8,16 @@
 
   var reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
+  /* ---- Transparent nav over full-viewport hero ---- */
+  var siteHeader = document.querySelector(".site-header");
+  var heroSection = document.querySelector(".hero-video");
+  if (siteHeader && heroSection) {
+    siteHeader.classList.add("nav-transparent");
+    new IntersectionObserver(function (entries) {
+      siteHeader.classList.toggle("nav-transparent", entries[0].isIntersecting);
+    }, { threshold: 0.1 }).observe(heroSection);
+  }
+
   /* ---- Hero video: honour reduced-motion (poster only, no autoplay) ---- */
   var heroVideo = document.querySelector(".hero-bg");
   if (heroVideo && reducedMotion) {

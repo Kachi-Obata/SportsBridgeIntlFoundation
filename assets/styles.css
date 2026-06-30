@@ -296,11 +296,33 @@ p { text-wrap: pretty; }
    7. NAVIGATION — flat broadsheet masthead
    ------------------------------------------------------------ */
 .site-header {
-  position: sticky;
+  position: fixed;
   top: 0;
+  width: 100%;
   z-index: var(--z-nav);
   background: var(--paper);
   border-bottom: var(--line);
+  transition: background 280ms ease, border-color 280ms ease;
+}
+
+/* Transparent state — added by JS only on pages with a .hero-video */
+.site-header.nav-transparent {
+  background: transparent;
+  border-bottom-color: transparent;
+}
+.nav-transparent .nav-links a { color: var(--paper); }
+.nav-transparent .nav-logo img { filter: brightness(0) invert(1); }
+.nav-transparent .nav-burger span { background: var(--paper); }
+.nav-transparent .nav-cta.btn-ink {
+  background: transparent;
+  color: var(--paper);
+  border-color: rgba(250, 247, 241, 0.65);
+}
+.nav-transparent .nav-cta.btn-ink:hover,
+.nav-transparent .nav-cta.btn-ink:focus-visible {
+  background: var(--paper);
+  color: var(--ink);
+  border-color: var(--paper);
 }
 .nav-bar {
   display: flex;
@@ -828,7 +850,7 @@ p { text-wrap: pretty; }
 /* ------------------------------------------------------------
    18. SUBPAGE HERO (about / programmes / impact / news / etc.)
    ------------------------------------------------------------ */
-.page-hero { padding-block-start: clamp(3.5rem, 7vw, 6rem); }
+.page-hero { padding-block-start: calc(72px + clamp(3.5rem, 7vw, 6rem)); }
 .page-hero .kicker { display: block; margin-bottom: 1.5rem; }
 .page-hero h1 { font-size: clamp(2.5rem, 6vw, 5.5rem); max-width: 14em; }
 .page-hero .lede {
@@ -1618,7 +1640,8 @@ p { text-wrap: pretty; }
   overflow: hidden;
   background: var(--ink);
   color: var(--paper);
-  min-height: clamp(34rem, 86vh, 52rem);
+  min-height: 100vh;
+  min-height: 100dvh;
   display: flex;
   align-items: center;
   padding-block: clamp(3rem, 7vw, 6rem);
@@ -1786,6 +1809,7 @@ p { text-wrap: pretty; }
 @media (max-width: 900px) {
   .nav-cta { padding: 0.55em 1em; font-size: 0.72rem; }
   .site-header .nav-bar { min-height: 64px; }
+  .page-hero { padding-block-start: calc(64px + clamp(3.5rem, 7vw, 6rem)); }
 }
 
 /* ------------------------------------------------------------
