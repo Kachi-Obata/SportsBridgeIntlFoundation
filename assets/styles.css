@@ -1995,6 +1995,12 @@ p { text-wrap: pretty; }
 
 /* 40.4 Beyond Borders — full-bleed hero (04A) with overlaid eyebrow/heading,
    then wrapped body with content left + small inset (04B) right */
+
+/* When a teal-band is the first element inside <main> (e.g. sport-without-borders.html),
+   push it below the fixed nav bar so the top of the image isn't clipped */
+main > .teal-band:first-child { margin-top: 72px; }
+@media (max-width: 900px) { main > .teal-band:first-child { margin-top: 64px; } }
+
 .bb-hero { position: relative; width: 100%; aspect-ratio: 16 / 6; overflow: hidden; }
 .bb-hero img {
   position: absolute; inset: 0; width: 100%; height: 100%;
